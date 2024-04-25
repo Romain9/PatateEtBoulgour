@@ -1,13 +1,12 @@
 package com.example.PatateEtBoulgour.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 @Entity
 @Data
@@ -19,6 +18,10 @@ public class Discipline {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_discipline;
     private String label;
+
+    @ManyToMany(mappedBy = "disciplines")
+    private Set<Activity> activities;
+
 }
 
 
