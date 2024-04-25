@@ -6,7 +6,7 @@ import sqlite3
 database_file = 'patate_et_boulgour_temp.db'
 
 # Chemin vers le dump de base de données
-database_dump = '../init_db_activites.sql'
+database_dump = '../export_json.sql'
 
 # Vérifier si le fichier de base de données existe
 if os.path.exists(database_file):
@@ -35,7 +35,7 @@ for entry in data:
     address = entry['address']
     
     c.execute(
-        "INSERT INTO activite (label, description, url, lat, lng, address) VALUES (?, ?, ?, ?, ?, ?)", 
+        "INSERT INTO activite (label, description, url, lat, lng, address) VALUES (?, ?, ?, ?, ?, ?)",
         (label, description, url, lat, lng, address)
     )
 
@@ -119,7 +119,8 @@ for entry in data:
 
 # Dump de la base de donnée.
 with open(database_dump, 'w', encoding='utf-8') as f:
-        for line in conn.iterdump():
+     for line in conn.iterdump():
+        if not line.startswith("CREATE TABLE"):  # vire les create table.
             f.write('%s\n' % line)
  
 conn.commit()
