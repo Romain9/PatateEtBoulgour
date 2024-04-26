@@ -15,6 +15,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "personNumber", "isActive" }) })
 public class Activity {
 
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -27,10 +28,10 @@ public class Activity {
     private Double lng;
     private String address;
 
-    @OneToMany
+    @ManyToMany
     private List<Pathology> pathologies;
 
-    @OneToMany
+    @ManyToMany
     private List<Discipline> disciplines;
 
 

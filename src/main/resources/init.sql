@@ -1,0 +1,1 @@
+INSERT INTO `user` (`age`, `lat`, `lng`, `id`, `address`, `email`, `first_name`, `gender`, `last_name`, `password`, `username`) VALUES ('20', '0', '0', NULL, 'Tours', 'admin@root.fr', 'Jean', 'Triple PHD', 'Sebastonks', 'Intox', 'Complot');
