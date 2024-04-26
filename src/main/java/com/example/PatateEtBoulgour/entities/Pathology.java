@@ -18,7 +18,6 @@ public class Pathology {
     private Long id;
 
     private String label;
-
 }
 
 

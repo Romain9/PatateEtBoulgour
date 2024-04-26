@@ -46,15 +46,8 @@ public class User {
     @NotBlank(message = "Le genre est requis")
     private String gender;
 
-    @NotNull(message = "La latitude est requise")
-    @DecimalMin(value = "-90.0", message = "La latitude doit être comprise entre -90 et 90")
-    @DecimalMax(value = "90.0", message = "La latitude doit être comprise entre -90 et 90")
-    private Double lat;
-
-    @NotNull(message = "La longitude est requise")
-    @DecimalMin(value = "-180.0", message = "La longitude doit être comprise entre -180 et 180")
-    @DecimalMax(value = "180.0", message = "La longitude doit être comprise entre -180 et 180")
-    private Double lng;
+    private Double latitude;
+    private Double longitude;
 
     @NotBlank(message = "L'adresse est requise")
     @Pattern(regexp = "^(\\d+)\\s+(.+)\\s*,\\s*(\\d{5})\\s+(.+)$", message = "Format d'adresse invalide")
