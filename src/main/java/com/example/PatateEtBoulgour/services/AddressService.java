@@ -38,16 +38,20 @@ public class AddressService {
                 JsonNode firstFeature = features.get(0);
                 JsonNode geometry = firstFeature.get("geometry");
                 JsonNode coordinates = geometry.get("coordinates");
+                JsonNode properties = firstFeature.get("properties");
+                Double score = properties.get("score").asDouble();
 
-                double longitude = coordinates.get(0).asDouble();
-                double latitude = coordinates.get(1).asDouble();
+                if (score > 0.75) {
+                    double longitude = coordinates.get(0).asDouble();
+                    double latitude = coordinates.get(1).asDouble();
 
-                return Optional.of(new Coordonnees(latitude, longitude));
-            } else {
-                return Optional.empty();
+                    return Optional.of(new Coordonnees(latitude, longitude));
+                }
             }
         } catch (Exception e) {
             return Optional.empty();
         }
+
+        return Optional.empty();
     }
 }
