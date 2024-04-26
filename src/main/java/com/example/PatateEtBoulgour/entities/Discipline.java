@@ -15,12 +15,12 @@ import java.util.Set;
 @AllArgsConstructor
 public class Discipline {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_discipline;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     private String label;
 
-    @ManyToMany(mappedBy = "disciplines")
-    private Set<Activity> activities;
+    @ManyToOne
+    Activity activity;
 
 }
 

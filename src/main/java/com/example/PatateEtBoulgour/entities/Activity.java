@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,7 +19,7 @@ public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_activity;
+    private Long id;
 
     private String label;
     private String description;
@@ -27,17 +28,11 @@ public class Activity {
     private Double lng;
     private String address;
 
-    @ManyToMany
-    @JoinTable(name = "activity_pathology",
-            joinColumns = @JoinColumn(name = "activity_id"),
-            inverseJoinColumns = @JoinColumn(name = "pathology_id"))
-    private Set<Pathology> pathologies;
+    @OneToMany
+    private List<Pathology> pathologies;
 
-    @ManyToMany
-    @JoinTable(name = "activity_discipline",
-            joinColumns = @JoinColumn(name = "id_activity"),
-            inverseJoinColumns = @JoinColumn(name = "id_discipline"))
-    private Set<Discipline> disciplines;
+    @OneToMany
+    private List<Discipline> disciplines;
 
 
 }

@@ -15,17 +15,10 @@ import java.util.Set;
 @AllArgsConstructor
 public class Pathology {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_pathology;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     private String label;
-
-    @ManyToMany(mappedBy = "pathologies")
-    private Set<Activity> activities;
-
-    @ManyToMany(mappedBy = "pathologies")
-    private Set<User> users;
-
 
 }
 

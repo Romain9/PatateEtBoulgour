@@ -17,25 +17,32 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_user;
 
-    private String nom;
-    private String prenom;
+    private Long id;
+
+    private String username;
+
+    private String lastName;
+
+    private String firstName;
+
     private String email;
+
     private int age;
-    private String genre;
+
+    private String gender;
+
     private Double lat;
+
     private Double lng;
+
     private String address;
 
-    @ManyToMany
-    @JoinTable(name = "user_pathology",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "pathology_id"))
-    private Set<Pathology> pathologies;
+    @OneToMany
+    private List<Pathology> pathologies;
 
-    @OneToMany(mappedBy = "user")
-    private List<Route> routes;
+    @OneToMany
+    private List<Activity> activities;
 
 }
 

@@ -15,8 +15,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class ActivityRating {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_rating;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
