@@ -17,8 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Activity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     private String label;
