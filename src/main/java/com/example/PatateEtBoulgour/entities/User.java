@@ -84,5 +84,17 @@ public class User {
         }
     }
 
+    public User(String username, String password, String lastName, String firstName, String email, int age, String gender, Double latitude, Double longitude, String address) {
+        this.username = username;
+        setPassword(password);
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.email = email;
+        this.age = age;
+        this.gender = gender;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.address = address;
+    }
 }
 

@@ -1,0 +1,30 @@
+{{>components/header}}
+
+
+<h1>Liste des Utilisateurs</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Âge</th>
+        <!-- Ajoutez d'autres colonnes si nécessaire -->
+    </tr>
+    </thead>
+    <tbody>
+    {{#users}}
+        <tr>
+            <td>{{lastName}}</td>
+            <td>{{firstName}}</td>
+            <td>{{age}}</td>
+            <!-- Utilisez les propriétés de l'objet User ici -->
+        </tr>
+    {{/users}}
+    </tbody>
+</table>
+
+<a href="/admin/add-new-user"><button>Ajouter un utilisateur</button></a>
+
+
+
+{{>components/footer}}
