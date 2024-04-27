@@ -23,8 +23,8 @@ public class Activity {
     private String label;
     private String description;
     private String url;
-    private Double lat;
-    private Double lng;
+    private Double latitude;
+    private Double longitude;
     private String address;
 
     @ManyToMany
