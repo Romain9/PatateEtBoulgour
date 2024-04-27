@@ -1,9 +1,5 @@
-package com.example.PatateEtBoulgour.Config;
+package com.example.PatateEtBoulgour.config;
 
-import com.example.PatateEtBoulgour.entities.User;
-import com.example.PatateEtBoulgour.repository.UserRepository;
-import org.springframework.beans.factory.SmartInitializingSingleton;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
