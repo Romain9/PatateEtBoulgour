@@ -2004,21 +2004,6 @@ INSERT INTO `activity_pathologies` (`activity_id`, `pathologies_id`) VALUES
                                                                          (204, 2),
                                                                          (204, 1),
                                                                          (204, 3);
-
---
--- Dumping data for table `activity_rating_seq`
---
-
-INSERT INTO `activity_rating_seq` (`next_not_cached_value`, `minimum_value`, `maximum_value`, `start_value`, `increment`, `cache_size`, `cycle_option`, `cycle_count`) VALUES
-    (1, 1, 9223372036854775806, 1, 50, 0, 0, 0);
-
---
--- Dumping data for table `activity_seq`
---
-
-INSERT INTO `activity_seq` (`next_not_cached_value`, `minimum_value`, `maximum_value`, `start_value`, `increment`, `cache_size`, `cycle_option`, `cycle_count`) VALUES
-    (1, 1, 9223372036854775806, 1, 50, 0, 0, 0);
-
 --
 -- Dumping data for table `discipline`
 --
@@ -2061,13 +2046,6 @@ INSERT INTO `discipline` (`activity_id`, `id`, `label`) VALUES
                                                             (NULL, 35, 'Métiers de la forme');
 
 --
--- Dumping data for table `discipline_seq`
---
-
-INSERT INTO `discipline_seq` (`next_not_cached_value`, `minimum_value`, `maximum_value`, `start_value`, `increment`, `cache_size`, `cycle_option`, `cycle_count`) VALUES
-    (1, 1, 9223372036854775806, 1, 50, 0, 0, 0);
-
---
 -- Dumping data for table `pathology`
 --
 
@@ -2077,20 +2055,6 @@ INSERT INTO `pathology` (`id`, `label`) VALUES
                                             (3, 'Maladies neuro-dégénératives'),
                                             (4, 'Maladies ou troubles métaboliques obésité et diabète'),
                                             (5, 'Maladies cardiovasculaires');
-
---
--- Dumping data for table `pathology_seq`
---
-
-INSERT INTO `pathology_seq` (`next_not_cached_value`, `minimum_value`, `maximum_value`, `start_value`, `increment`, `cache_size`, `cycle_option`, `cycle_count`) VALUES
-    (1, 1, 9223372036854775806, 1, 50, 0, 0, 0);
-
---
--- Dumping data for table `user_seq`
---
-
-INSERT INTO `user_seq` (`next_not_cached_value`, `minimum_value`, `maximum_value`, `start_value`, `increment`, `cache_size`, `cycle_option`, `cycle_count`) VALUES
-    (1, 1, 9223372036854775806, 1, 50, 0, 0, 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

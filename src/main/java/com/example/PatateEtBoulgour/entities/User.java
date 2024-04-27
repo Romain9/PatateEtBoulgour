@@ -20,14 +20,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name="password")
     private String passwordHash;
 
     @NotBlank(message = "Le nom d'utilisateur est requis")
     @Size(min = 4, max = 20, message = "Le nom d'utilisateur doit comporter entre 4 et 20 caractères")
+
     private String username;
 
     @NotBlank(message = "Le mot de passe est requis")
     @Size(min = 6, message = "Le mot de passe doit comporter au moins 6 caractères")
+    @Transient
     private String password;
 
     @NotBlank(message = "Le nom de famille est requis")
