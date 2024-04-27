@@ -1,6 +1,8 @@
 package com.example.PatateEtBoulgour.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,5 +27,7 @@ public class ActivityRating {
     @JoinColumn(name = "activity_id")
     private Activity activity;
 
+    @Min(value = 0, message = "La note doit être au moins de 0")
+    @Max(value = 7, message = "La note doit être au maximum de 7")
     private double rating;
 }
