@@ -29,7 +29,6 @@ public class HomeController {
         m.put("number", model);
         if(session.getAttribute("username") != null)
             m.put("username", session.getAttribute("username"));
-        else m.put("username", "Pas connecté");
 
         return new ModelAndView("index", m);
     }
