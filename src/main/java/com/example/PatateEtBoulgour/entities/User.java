@@ -50,9 +50,6 @@ public class User {
     @NotBlank(message = "Le genre est requis")
     private String gender;
 
-    private Double latitude;
-    private Double longitude;
-
     @NotBlank(message = "L'adresse est requise")
     @Pattern(regexp = "^(\\d+)\\s+(.+)\\s*,\\s*(\\d{5})\\s+(.+)$", message = "Format d'adresse invalide")
     private String address; // Format: Numéro de rue Nom de rue, Code postal Ville
@@ -84,7 +81,7 @@ public class User {
         }
     }
 
-    public User(String username, String password, String lastName, String firstName, String email, int age, String gender, Double latitude, Double longitude, String address) {
+    public User(String username, String password, String lastName, String firstName, String email, int age, String gender, String address) {
         this.username = username;
         setPassword(password);
         this.lastName = lastName;
@@ -92,8 +89,6 @@ public class User {
         this.email = email;
         this.age = age;
         this.gender = gender;
-        this.latitude = latitude;
-        this.longitude = longitude;
         this.address = address;
     }
 }

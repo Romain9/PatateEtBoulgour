@@ -20,11 +20,9 @@ public class UserController {
                              @RequestParam("email") String email,
                              @RequestParam("age") int age,
                              @RequestParam("gender") String gender,
-                             @RequestParam("latitude") double latitude,
-                             @RequestParam("longitude") double longitude,
                              @RequestParam("address") String address) {
         // Créer l'objet User avec les données du formulaire
-        User user = new User(username, password, lastName, firstName, email, age, gender, latitude, longitude, address);
+        User user = new User(username, password, lastName, firstName, email, age, gender, address);
         // Ajouter les coordonnées GPS et l'adresse à l'utilisateur
         userService.createUser(user);
         return "redirect:/admin/user-list";

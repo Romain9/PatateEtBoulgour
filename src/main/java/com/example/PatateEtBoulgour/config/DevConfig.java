@@ -24,8 +24,6 @@ public class DevConfig {
                     .address("25 Je ne contracte pas, 00000 Nul Part")
                     .firstName("Jean")
                     .lastName("Sebastonks")
-                    .latitude(0.0)
-                    .longitude(0.0)
                     .password("tamere")
                     .username("Compliste800")
                     .build();

@@ -12,7 +12,6 @@ public interface UserRepository  extends JpaRepository<User, Long> {
     List<User> findByAgeGreaterThanEqual(int age);
     List<User> findByGender(String gender);
     List<User> findByAddress(String address);
-    List<User> findByLatitudeBetweenAndLongitudeBetween(Double minLat, Double maxLat, Double minLong, Double maxLong);
     List<User> findByPathologies_Label(String pathologyName);
     List<User> findByActivities_Label(String activityName);
 }
