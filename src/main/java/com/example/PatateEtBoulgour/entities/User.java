@@ -53,7 +53,7 @@ public class User {
     private String gender;
 
     @NotBlank(message = "L'adresse est requise")
-    @Pattern(regexp = "^(\\d+)\\s+(.+)\\s*,\\s*(\\d{5})\\s+(.+)$", message = "Format d'adresse invalide")
+    @Pattern(regexp = "^(\\d+)\\s+(.+)\\s*,\\s*(\\d{5})\\s+(.+)$", message = "Format d'adresse invalide: Numéro Nom Rue, Code Postal Ville")
     private String address; // Format: Numéro de rue Nom de rue, Code postal Ville
 
     @OneToMany
