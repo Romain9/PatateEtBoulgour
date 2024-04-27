@@ -15,7 +15,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-
     public ModelAndView getUserListModelAndView() {
         List<User> users = userRepository.findAll();
         ModelAndView modelAndView = new ModelAndView();

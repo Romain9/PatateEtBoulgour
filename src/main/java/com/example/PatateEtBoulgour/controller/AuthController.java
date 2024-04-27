@@ -5,6 +5,7 @@ import com.example.PatateEtBoulgour.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +17,7 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/login/process")
-    public String login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+    public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         // Vérification des informations d'identification de l'utilisateur
         User user = userService.authenticate(username, password);
         if (user != null) {
@@ -26,8 +27,10 @@ public class AuthController {
             // Redirection vers une page de succès
             return "redirect:/";
         } else {
-            // Redirection vers une page d'échec d'authentification
-            return "Echec de la connexion";
+            // Redirection vers la page de login
+            model.addAttribute("error", "Echec de authentication");
+            model.addAttribute("username", username);
+            return "forms/login";
         }
     }
 
@@ -40,6 +43,6 @@ public class AuthController {
 
     @GetMapping("/login")
     public String showLoginPage() {
-        return "components/connexion";
+        return "forms/login";
     }
 }

@@ -1,8 +1,13 @@
 <h2>Connexion</h2>
 <form action="/login/process" method="post">
+
+    {{#error}}
+        <p>{{this}}</p>
+    {{/error}}
+
     <div>
         <label for="username">Nom d'utilisateur:</label>
-        <input type="text" id="username" name="username" required>
+        <input type="text" id="username" name="username" {{#username}}value="{{username}}"{{/username}} required>
     </div>
     <div>
         <label for="password">Mot de passe:</label>

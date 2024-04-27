@@ -42,6 +42,7 @@ public class UserController {
             userService.createUser(user);
             return "redirect:/admin/user-list";
         }
+
     }
 
     @GetMapping("/createUser")
