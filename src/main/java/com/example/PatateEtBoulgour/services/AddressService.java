@@ -17,7 +17,6 @@ public class AddressService {
 
     public Coordonnees getCoordinates(String address) throws InvalidApiResponse, InvalidAddressException {
         String url = "https://api-adresse.data.gouv.fr/search/?q=" + address.replaceAll("\\s+", "+");
-        System.out.println(url);
         RestTemplate restTemplate = new RestTemplate();
 
         String response = restTemplate.getForObject(url, String.class);
