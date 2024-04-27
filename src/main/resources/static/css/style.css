@@ -1,8 +1,22 @@
+:root {
+    --text: #0f120e;
+    --bg: #f6f9f5;
+    --main: #67c04e;
+    --secondary: #98e483;
+    --accent: #77ed56;
+    --text-contrast: #64d97b;
+    --footer: #d3d6d2;
+
+}
+
 body {
     margin: 0;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 10vh 1fr 20vh;
+    grid-template-rows: 10vh minmax(82vh, auto) 8vh;
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--bg);
 }
 
 
@@ -23,13 +37,14 @@ header {
 
 .logo {
     grid-column: 1;
-    background-color: #59c33e;
+    background-color: var(--main);
 }
 
 .btn {
     text-decoration: none;
-    text-align: center;
-    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn:hover {
@@ -54,7 +69,7 @@ main {
 
 footer {
     grid-row: 3;
-    background-color: #757575;
+    background-color: var(--footer);
 }
 
 
@@ -70,15 +85,15 @@ Page d'accueil
     display: grid;
     grid-auto-rows: 10em;
     width: 40%;
-    height: 80vh;
+    min-height: auto;
+    max-height: 70vh;
     margin: 0 auto 0 auto;
-    overflow-y: scroll;
+    overflow-y: auto;
     scrollbar-width: thin;
 }
 
 .activity {
     margin: 0;
-
     border: solid 1px grey;
     border-radius: 2px;
     transition: .5s ease-out;
@@ -98,12 +113,17 @@ Page profil
 ====================
 */
 
+main h2 {
+    margin: 2em 0 2em 30%;
+}
+
 .entetePr {
     margin: 0 auto 0 auto;
     width: 40%;
     display: grid;
     grid-template-columns: auto auto;
     grid-template-rows: auto auto auto;
+    border: solid red 1px;
 }
 
 .name {

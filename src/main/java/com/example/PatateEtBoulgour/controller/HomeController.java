@@ -32,7 +32,7 @@ public class HomeController {
 
     @RequestMapping("/user")
     public ModelAndView account() {
-        Map<String, String> m = new HashMap<>();
+        Map<String, Object> m = new HashMap<>();
         m.put("Name", "Romain");
         return new ModelAndView("profile", m);
     }
