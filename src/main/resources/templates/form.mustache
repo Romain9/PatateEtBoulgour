@@ -1,1 +1,16 @@
-{{>components}}
+{{>components/header}}
+
+<!-- Jsp si ça marche  mais condition mustache -->
+
+{{#login}}
+
+    {{>components/connexion}}
+
+{{/login}}
+{{^login}}
+
+    {{>components/inscription}}
+
+{{/login}}
+
+{{>components/footer}}

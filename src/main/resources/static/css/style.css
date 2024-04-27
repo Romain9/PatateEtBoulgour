@@ -88,3 +88,46 @@ Page d'accueil
 .activity:hover {
     background-color: #e7e7e7;
 }
+
+
+/**
+====================
+
+Page profil
+
+====================
+*/
+
+.entetePr {
+    margin: 0 auto 0 auto;
+    width: 40%;
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto auto;
+}
+
+.name {
+    grid-column: 1/-1;
+    grid-row: 1;
+}
+
+
+.age {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.gender {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.adresse {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.pathology {
+    grid-column: 2;
+    grid-row: 3;
+}

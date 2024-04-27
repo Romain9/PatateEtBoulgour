@@ -1,6 +1,39 @@
 {{>components/header}}
 
-<h1>Profil de {{Name}}</h1>
+
+
+<div class="entetePr">
+    <h1 class="name">Profil de {{Name}}</h1>
+    <p class="age">77</p>
+    <p class="gender">M</p>
+    <p class="adresse">50 rue des pasteque</p>
+    <p class="pathology">Chepa</p>
+</div>
+
+
+{{#activities}}
+
+    <h2>Vos activités</h2>
+
+    <div class="activities">
+        {{#number}}
+            <p class="activity">AAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
+        {{/number}}
+
+    </div>
+{{/activities}}
+{{^activities}}
+
+<h3>Aucune activité</h3>
+
+{{/activities}}
+
+
+
+
+
+
+
 
 
 {{>components/footer}}
