@@ -10,12 +10,11 @@
 
 <header>
     <a href="/" class="logo"></a>
-    <a href="/user" class="btn btn1">Profil</a>
-    <a href="/login" class="btn btn2">Connexion</a>
-
+    {{#username}}
+        <a href="/user" class="btn btn2">{{username}}</a>
+    {{/username}}
+    {{^username}}
+        <a href="/login" class="btn btn2">Connexion</a>
+    {{/username}}
 </header>
-
-<main>
-
-    
     
