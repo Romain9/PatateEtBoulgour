@@ -30,7 +30,6 @@ public class HomeController {
         return new ModelAndView("index", m);
     }
 
-
     @RequestMapping("/user")
     public ModelAndView account() {
         Map<String, String> m = new HashMap<>();

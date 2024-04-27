@@ -1,6 +1,6 @@
 package com.example.PatateEtBoulgour.entities;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import com.example.PatateEtBoulgour.services.PasswordService;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -63,8 +64,24 @@ public class User {
     private List<Activity> activities;
 
     public void setPassword(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        this.passwordHash = passwordEncoder.encode(password);
+        this.password = password;
+        this.passwordHash = PasswordService.encodePassword(password);
+    }
+
+    public String getPassword() {
+        return this.passwordHash;
+    }
+
+    public static class UserBuilder {
+        public UserBuilder password(String password) {
+            this.password = password;
+            this.passwordHash = PasswordService.encodePassword(password);
+            return this;
+        }
+
+        public UserBuilder passwordHash(String passwordHash) {
+            throw new UnsupportedOperationException("Veuillez utiliser le .password");
+        }
     }
 
 }
