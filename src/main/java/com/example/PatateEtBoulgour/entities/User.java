@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.checkerframework.common.aliasing.qual.Unique;
 
 import java.util.List;
 @Entity
@@ -26,7 +27,7 @@ public class User {
 
     @NotBlank(message = "Le nom d'utilisateur est requis")
     @Size(min = 4, max = 20, message = "Le nom d'utilisateur doit comporter entre 4 et 20 caractères")
-
+    @Unique
     private String username;
 
     @NotBlank(message = "Le mot de passe est requis")
@@ -41,6 +42,7 @@ public class User {
     private String firstName;
 
     @Email(message = "Format email invalide")
+    @Unique
     private String email;
 
     @Min(value = 18, message = "L'âge doit être d'au moins 18 ans")
