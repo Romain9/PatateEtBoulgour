@@ -1,40 +1,36 @@
 package com.example.PatateEtBoulgour.services;
 
 
+import com.example.PatateEtBoulgour.exception.InvalidAddressException;
+import com.example.PatateEtBoulgour.exception.InvalidApiResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import com.example.PatateEtBoulgour.entities.Coordonnees;
+import com.example.PatateEtBoulgour.dto.Coordonnees;
 
 import java.util.Optional;
 
 @Service
 public class AddressService {
 
-    public Optional<Coordonnees> getCoordinates(String address) {
+    public Coordonnees getCoordinates(String address) throws InvalidApiResponse, InvalidAddressException {
         String url = "https://api-adresse.data.gouv.fr/search/?q=" + address.replaceAll("\\s+", "+");
 
         RestTemplate restTemplate = new RestTemplate();
 
-        try {
-            String response = restTemplate.getForObject(url, String.class);
+        String response = restTemplate.getForObject(url, String.class);
 
-            return parseCoordinatesFromResponse(response);
-        } catch (Exception e) {
-            return Optional.empty();
-        }
+        return parseCoordinatesFromResponse(response);
     }
 
-    private Optional<Coordonnees> parseCoordinatesFromResponse(String response) {
+    private Coordonnees parseCoordinatesFromResponse(String response) throws InvalidApiResponse, InvalidAddressException {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-
             JsonNode jsonResponse = objectMapper.readTree(response);
-
             JsonNode features = jsonResponse.get("features");
 
-            if (features != null && features.isArray() && features.size() > 0) {
+            if (features != null && features.isArray() && !features.isEmpty()) {
                 JsonNode firstFeature = features.get(0);
                 JsonNode geometry = firstFeature.get("geometry");
                 JsonNode coordinates = geometry.get("coordinates");
@@ -45,13 +41,15 @@ public class AddressService {
                     double longitude = coordinates.get(0).asDouble();
                     double latitude = coordinates.get(1).asDouble();
 
-                    return Optional.of(new Coordonnees(latitude, longitude));
+                    return new Coordonnees(latitude, longitude);
                 }
+
+                throw new InvalidAddressException();
             }
         } catch (Exception e) {
-            return Optional.empty();
+            System.out.println(e.getMessage());
         }
 
-        return Optional.empty();
+        throw new InvalidApiResponse();
     }
 }

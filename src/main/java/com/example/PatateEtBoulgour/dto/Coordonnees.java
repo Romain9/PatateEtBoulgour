@@ -1,4 +1,4 @@
-package com.example.PatateEtBoulgour.entities;
+package com.example.PatateEtBoulgour.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
