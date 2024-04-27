@@ -1,4 +1,5 @@
 package com.example.PatateEtBoulgour.services;
+import com.example.PatateEtBoulgour.services.PasswordService;
 
 import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.repository.UserRepository;
@@ -13,14 +14,6 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    public ModelAndView getUsersModelAndView() {
-        List<User> users = userRepository.findAll();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("users", users);
-        modelAndView.setViewName("lucastest");
-        return modelAndView;
-    }
 
 
     public ModelAndView getUserListModelAndView() {
@@ -39,5 +32,13 @@ public class UserService {
 
     public void createUser(User user) {
         userRepository.save(user);
+    }
+
+    public User authenticate(String username, String password) {
+        User user = userRepository.findByUsername(username);
+        if (user != null && PasswordService.matches(password, user.getPassword())) {
+            return user;
+        }
+        return null;
     }
 }

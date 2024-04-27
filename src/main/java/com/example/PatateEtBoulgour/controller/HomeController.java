@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
     
     @RequestMapping
-    public ModelAndView home() {
+    public ModelAndView home(HttpSession session) {
         Map<String, Object> m = new HashMap<>();
         List<String> model = new ArrayList<>();
 
@@ -26,6 +27,9 @@ public class HomeController {
         model.add("5");
 
         m.put("number", model);
+        if(session.getAttribute("username") != null)
+            m.put("username", session.getAttribute("username"));
+        else m.put("username", "Pas connecté");
 
         return new ModelAndView("index", m);
     }
