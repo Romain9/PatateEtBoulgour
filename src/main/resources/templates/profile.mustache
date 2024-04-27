@@ -3,11 +3,15 @@
 
 
 <div class="entetePr">
-    <h1 class="name">Profil de {{Name}}</h1>
-    <p class="age">77</p>
-    <p class="gender">M</p>
-    <p class="adresse">50 rue des pasteque</p>
-    <p class="pathology">Chepa</p>
+    <h1 class="name">Profil de {{user.firstName}}, {{user.lastName}}</h1>
+    <p class="age">{{user.age}}</p>
+    <p class="gender">{{user.gender}}</p>
+    <p class="adresse">{{user.address}}</p>
+    <ul class="pathology">
+        {{#user.pathologies}}
+            <li>{{label}}</li>
+        {{/user.pathologies}}
+    </ul>
 </div>
 
 <h2>Vos activités</h2>
@@ -15,8 +19,7 @@
 {{#activities}}
 
     <p class="activity">AAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
-        
-    
+
 {{/activities}}
 {{^activities}}
 

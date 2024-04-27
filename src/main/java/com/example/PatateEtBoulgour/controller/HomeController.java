@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.example.PatateEtBoulgour.entities.Pathology;
+import com.example.PatateEtBoulgour.entities.User;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,7 +38,21 @@ public class HomeController {
     @RequestMapping("/user")
     public ModelAndView account() {
         Map<String, Object> m = new HashMap<>();
+
+
+        User romain = User
+                .builder()
+                .firstName("Romain")
+                .lastName("Msiah")
+                .age(77)
+                .address("50 rue des pasteque")
+                .gender("Arbre")
+                .pathologies(List.of(Pathology.builder().label("Pastafari").build(), Pathology.builder().label("CSS Lover").build()))
+                .build();
+
         m.put("Name", "Romain");
+        m.put("user", romain);
+
         return new ModelAndView("profile", m);
     }
 }
