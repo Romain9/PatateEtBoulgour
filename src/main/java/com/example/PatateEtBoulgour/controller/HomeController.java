@@ -2,6 +2,8 @@ package com.example.PatateEtBoulgour.controller;
 
 import java.util.*;
 
+import com.example.PatateEtBoulgour.annotations.Logged;
+import com.example.PatateEtBoulgour.annotations.RequireRole;
 import com.example.PatateEtBoulgour.entities.Activity;
 import com.example.PatateEtBoulgour.entities.Pathology;
 import com.example.PatateEtBoulgour.entities.User;

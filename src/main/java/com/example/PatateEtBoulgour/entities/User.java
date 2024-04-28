@@ -1,5 +1,6 @@
 package com.example.PatateEtBoulgour.entities;
 
+import com.example.PatateEtBoulgour.enums.Role;
 import com.example.PatateEtBoulgour.services.PasswordService;
 
 import jakarta.persistence.*;
@@ -31,6 +32,9 @@ public class User {
     @Size(min = 4, max = 20, message = "Le nom d'utilisateur doit comporter entre 4 et 20 caractères")
     @Unique
     private String username;
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
 
     @NotBlank(message = "Le mot de passe est requis")
     @Size(min = 6, message = "Le mot de passe doit comporter au moins 6 caractères")

@@ -1,6 +1,7 @@
-package com.example.PatateEtBoulgour.config;
+package com.example.PatateEtBoulgour.config.profiles;
 
 import com.example.PatateEtBoulgour.entities.User;
+import com.example.PatateEtBoulgour.enums.Role;
 import com.example.PatateEtBoulgour.repository.UserRepository;
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class DevConfig {
                     .lastName("Sebastonks")
                     .password("tamere")
                     .username("Compliste800")
+                    .role(Role.USER)
                     .build();
             userRepository.save(admin);
         };
