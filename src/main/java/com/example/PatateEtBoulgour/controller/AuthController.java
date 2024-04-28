@@ -23,7 +23,7 @@ public class AuthController {
         if (user != null) {
             // Création de la session et stockage des informations de l'utilisateur
             session.setAttribute("userId", user.getId());
-            session.setAttribute("username", user.getUsername());
+            session.setAttribute("userName", user.getUsername());
             // Redirection vers une page de succès
             return "redirect:/";
         } else {

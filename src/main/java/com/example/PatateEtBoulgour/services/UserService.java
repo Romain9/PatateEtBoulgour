@@ -39,9 +39,9 @@ public class UserService {
 
     public User authenticate(String username, String password) {
         User user = userRepository.findByUsername(username);
-        if (user != null && PasswordService.matches(password, user.getPassword())) {
+        if (user != null && PasswordService.matches(password, user.getPassword()))
             return user;
-        }
+
         return null;
     }
 
@@ -50,6 +50,6 @@ public class UserService {
      * @return L'utilisateur s'il est connecté, null sinon.
      */
     public User getCurrentUser() {
-        return userRepository.findById((Long)session.getAttribute("userid")).orElse(null);
+        return userRepository.findById((Long)session.getAttribute("userId")).orElse(null);
     }
 }
