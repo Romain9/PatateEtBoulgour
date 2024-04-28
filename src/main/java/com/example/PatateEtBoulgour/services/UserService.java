@@ -50,6 +50,7 @@ public class UserService {
      * @return L'utilisateur s'il est connecté, null sinon.
      */
     public User getCurrentUser() {
+        if(session == null) return null;
         return userRepository.findById((Long)session.getAttribute("userId")).orElse(null);
     }
 }
