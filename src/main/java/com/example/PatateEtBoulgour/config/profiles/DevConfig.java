@@ -27,7 +27,7 @@ public class DevConfig {
                     .lastName("Sebastonks")
                     .password("tamere")
                     .username("Compliste800")
-                    .role(Role.USER)
+                    .role(Role.SUPER_ADMIN)
                     .build();
             userRepository.save(admin);
         };
