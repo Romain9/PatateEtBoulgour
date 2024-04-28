@@ -1,5 +1,6 @@
 package com.example.PatateEtBoulgour.controller;
 
+import com.example.PatateEtBoulgour.annotations.RequireLogged;
 import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.services.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -34,9 +36,10 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/logout")
+    @RequireLogged
+    @RequestMapping("/logout")
     public String logout(HttpSession session) {
-        // Invalidating the session
+        // Invalidation de la session
         session.invalidate();
         return "redirect:/";
     }
