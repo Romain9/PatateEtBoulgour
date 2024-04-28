@@ -2,6 +2,8 @@ package com.example.PatateEtBoulgour.controller;
 
 import java.util.*;
 
+import com.example.PatateEtBoulgour.annotations.RequireLogged;
+import com.example.PatateEtBoulgour.annotations.RequireRole;
 import com.example.PatateEtBoulgour.entities.Activity;
 import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.services.ActivityService;
@@ -34,7 +36,7 @@ public class HomeController {
         return new ModelAndView("index", m);
     }
 
-
+    @RequireLogged
     @RequestMapping("/user")
     public ModelAndView account() {
         Map<String, Object> m = new HashMap<>();
@@ -46,8 +48,6 @@ public class HomeController {
             Set<Activity> activities = userService.getUserActivities(user);
             m.put("activities", activities);
         }
-
-
 
         return new ModelAndView("profile", m);
     }
