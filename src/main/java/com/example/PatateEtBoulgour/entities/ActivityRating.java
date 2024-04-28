@@ -30,6 +30,6 @@ public class ActivityRating {
     private Activity activity;
 
     @Min(value = 0, message = "La note doit être au moins de 0")
-    @Max(value = 7, message = "La note doit être au maximum de 7")
+    @Max(value = 5, message = "La note doit être au maximum de 5")
     private double rating;
 }
