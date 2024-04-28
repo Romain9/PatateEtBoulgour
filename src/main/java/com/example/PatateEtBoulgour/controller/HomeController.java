@@ -28,9 +28,7 @@ public class HomeController {
         Map<String, Object> m = new HashMap<>();
 
         User user = userService.getCurrentUser();
-        if (user != null) {
-            m.put("user", user); // Ajoutez l'utilisateur à la map
-        }
+        if (user != null)  m.put("user", user);
 
         Set<Activity> activities = activityService.getAllActivities();
         m.put("activities", activities);
@@ -43,19 +41,15 @@ public class HomeController {
     public ModelAndView account() {
         Map<String, Object> m = new HashMap<>();
 
+        User user = userService.getCurrentUser();
+        if (user != null){
+            m.put("user", user);
 
-        User romain = User
-                .builder()
-                .firstName("Romain")
-                .lastName("Msiah")
-                .age(77)
-                .address("50 rue des pasteque")
-                .gender("Arbre")
-                .pathologies(List.of(Pathology.builder().label("Pastafari").build(), Pathology.builder().label("CSS Lover").build()))
-                .build();
+            Set<Activity> activities = userService.getUserActivities(user);
+            m.put("activities", activities);
+        }
 
-        m.put("Name", "Romain");
-        m.put("user", romain);
+
 
         return new ModelAndView("profile", m);
     }

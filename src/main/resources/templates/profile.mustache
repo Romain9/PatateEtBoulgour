@@ -1,24 +1,26 @@
 {{>components/header}}
 
 
+{{#user}}
+    <div class="entetePr">
+        <h1 class="name">Profil de {{firstName}}, {{lastName}}</h1>
+        <p class="age">{{age}}</p>
+        <p class="gender">{{gender}}</p>
+        <p class="adresse">{{address}}</p>
+        <ul class="pathology">
+            {{#pathologies}}
+                <li>{{label}}</li>
+            {{/pathologies}}
+        </ul>
+    </div>
+{{/user}}
 
-<div class="entetePr">
-    <h1 class="name">Profil de {{user.firstName}}, {{user.lastName}}</h1>
-    <p class="age">{{user.age}}</p>
-    <p class="gender">{{user.gender}}</p>
-    <p class="adresse">{{user.address}}</p>
-    <ul class="pathology">
-        {{#user.pathologies}}
-            <li>{{label}}</li>
-        {{/user.pathologies}}
-    </ul>
-</div>
 
 <h2>Vos activités</h2>
 <div class="activities">
 {{#activities}}
 
-    <p class="activity">AAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
+    <p class="activity">{{label}}</p>
 
 {{/activities}}
 {{^activities}}
