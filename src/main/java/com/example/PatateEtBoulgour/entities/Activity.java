@@ -33,5 +33,11 @@ public class Activity {
     @ManyToMany
     private List<Discipline> disciplines;
 
+    @ManyToMany
+    @JoinTable(name = "user_activity",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "activity_id"))
+    private Set<User> participants;
+
 
 }

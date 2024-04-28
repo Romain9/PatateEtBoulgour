@@ -1,13 +1,14 @@
 package com.example.PatateEtBoulgour.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.example.PatateEtBoulgour.entities.Activity;
 import com.example.PatateEtBoulgour.entities.Pathology;
 import com.example.PatateEtBoulgour.entities.User;
+import com.example.PatateEtBoulgour.services.ActivityService;
+import com.example.PatateEtBoulgour.services.UserService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,24 +17,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/")
 public class HomeController {
-    
+
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ActivityService activityService;
+
     @RequestMapping
-    public ModelAndView home(HttpSession session) {
+    public ModelAndView home() {
         Map<String, Object> m = new HashMap<>();
-        List<String> model = new ArrayList<>();
 
-        model.add("1");
-        model.add("2");
-        model.add("3");
-        model.add("4");
-        model.add("5");
+        User user = userService.getCurrentUser();
+        if (user != null) {
+            m.put("user", user); // Ajoutez l'utilisateur à la map
+        }
 
-        m.put("number", model);
-        if(session.getAttribute("username") != null)
-            m.put("username", session.getAttribute("username"));
+        Set<Activity> activities = activityService.getAllActivities();
+        m.put("activities", activities);
 
         return new ModelAndView("index", m);
     }
+
 
     @RequestMapping("/user")
     public ModelAndView account() {

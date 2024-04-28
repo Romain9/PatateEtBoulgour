@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import org.checkerframework.common.aliasing.qual.Unique;
 
 import java.util.List;
+import java.util.Set;
+
 @Entity
 @Data
 @Builder
@@ -59,8 +61,8 @@ public class User {
     @OneToMany
     private List<Pathology> pathologies;
 
-    @ManyToMany
-    private List<Activity> activities;
+    @ManyToMany(mappedBy = "participants")
+    private Set<Activity> activities;
 
     public void setPassword(String password) {
         this.password = password;

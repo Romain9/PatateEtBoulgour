@@ -1,4 +1,5 @@
 package com.example.PatateEtBoulgour.services;
+import com.example.PatateEtBoulgour.entities.Activity;
 import com.example.PatateEtBoulgour.services.PasswordService;
 
 import com.example.PatateEtBoulgour.entities.User;
@@ -10,14 +11,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
-    HttpSession session;
+    private HttpSession session;
+
 
     public ModelAndView getUserListModelAndView() {
         List<User> users = userRepository.findAll();
@@ -50,7 +54,15 @@ public class UserService {
      * @return L'utilisateur s'il est connecté, null sinon.
      */
     public User getCurrentUser() {
-        if(session == null) return null;
-        return userRepository.findById((Long)session.getAttribute("userId")).orElse(null);
+        if(session == null)
+            return null;
+        Long userId = (Long) session.getAttribute("userId");
+        if(userId == null)
+            return null;
+        return userRepository.findById(userId).orElse(null);
+    }
+
+    public Set<Activity> getUserActivities(User user){
+        return userRepository.findActivitiesByUserId(user.getId());
     }
 }
