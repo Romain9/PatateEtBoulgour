@@ -32,7 +32,4 @@ public class ActivityRating {
     @Min(value = 0, message = "La note doit être au moins de 0")
     @Max(value = 7, message = "La note doit être au maximum de 7")
     private double rating;
-
-    @CurrentTimestamp
-    private double date;
 }
