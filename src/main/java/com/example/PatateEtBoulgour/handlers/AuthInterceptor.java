@@ -1,8 +1,7 @@
 package com.example.PatateEtBoulgour.handlers;
 
-import com.example.PatateEtBoulgour.annotations.Logged;
+import com.example.PatateEtBoulgour.annotations.RequireLogged;
 import com.example.PatateEtBoulgour.annotations.RequireRole;
-import com.example.PatateEtBoulgour.enums.Role;
 import com.example.PatateEtBoulgour.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,7 +29,7 @@ public class AuthInterceptor implements HandlerInterceptor {
             Method method = handlerMethod.getMethod();
 
             // Vérifie les controlleurs avec @Logged
-            if (method.isAnnotationPresent(Logged.class)) {
+            if (method.isAnnotationPresent(RequireLogged.class)) {
                 if (!isAuthenticated()) {
                     response.sendRedirect("/login");
                     return false;
