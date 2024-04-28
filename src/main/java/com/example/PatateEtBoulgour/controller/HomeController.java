@@ -23,7 +23,7 @@ public class HomeController {
     @Autowired
     private ActivityService activityService;
 
-    @RequestMapping
+    @RequestMapping()
     public ModelAndView home() {
         Map<String, Object> m = new HashMap<>();
 
