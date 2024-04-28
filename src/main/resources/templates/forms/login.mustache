@@ -1,17 +1,20 @@
-<h2>Connexion</h2>
+{{>components/header}}
+
+<h2 class="conn">Connexion</h2>
+{{#error}}
+        <p class="error"><strong>Erreur:</strong> {{this}}</p>
+    {{/error}}
 <form action="/login/process" method="post">
 
-    {{#error}}
-        <p>{{this}}</p>
-    {{/error}}
+    
 
-    <div>
-        <label for="username">Nom d'utilisateur:</label>
-        <input type="text" id="username" name="username" {{#username}}value="{{username}}"{{/username}} required>
-    </div>
-    <div>
-        <label for="password">Mot de passe:</label>
-        <input type="password" id="password" name="password" required>
-    </div>
-    <button type="submit">Se connecter</button>
+    <label for="username">Nom d'utilisateur:</label>
+    <input type="text" id="username" name="username" {{#username}}value="{{username}}"{{/username}} required>
+   
+    <label for="password">Mot de passe:</label>
+    <input type="password" id="password" name="password" required>
+    
+    <input type="submit" value="Se connecter">
 </form>
+
+{{>components/footer}}

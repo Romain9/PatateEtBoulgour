@@ -1,0 +1,18 @@
+<div class="activities">
+{{#activities}}
+    <div class="activity items" >
+    
+        <a class="label" href="{{url}}">{{label}}</a>
+        
+        <p class="description">{{description}}</p>
+        
+        <a class="addActivity" href="/add">Ajouter activitées</a>
+        
+    </div>
+{{/activities}}
+{{^activities}}
+
+    <h3>Aucune activité</h3>
+
+{{/activities}}
+</div>

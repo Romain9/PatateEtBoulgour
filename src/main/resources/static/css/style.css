@@ -30,7 +30,7 @@ Header
 
 header {
     grid-row: 1;
-    border-bottom: #d4e8cf 1px solid;
+    border-bottom: var(--secondary) 1px solid;
     display: grid;
     grid-template-columns: 15vw 1fr 10vw 10vw;
 }
@@ -38,6 +38,13 @@ header {
 .logo {
     grid-column: 1;
     background-color: var(--main);
+
+    text-decoration: none;
+    color: var(--bg);
+    font-size: 20pt;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn {
@@ -48,7 +55,7 @@ header {
 }
 
 .btn:hover {
-    transition: .5s ease-out;
+    transition: .5s ease-in-out;
     background-color: #abf399;
 }
 
@@ -93,6 +100,13 @@ Page d'accueil
 }
 
 .activity {
+    display: grid;
+    grid-template-columns: 1fr 1fr 25%;
+    grid-template-rows: 10% 60% 30%;
+    overflow: none;
+}
+
+.items {
     margin: 0;
     border: solid 1px grey;
     border-radius: 2px;
@@ -100,10 +114,43 @@ Page d'accueil
     cursor: pointer;
 }
 
-.activity:hover {
+.items:hover {
     background-color: #e7e7e7;
 }
 
+.label {
+    grid-column: 1/-1;
+    grid-row: 1;
+}
+
+.description {
+    grid-column: 1/-1;
+    grid-row: 2;
+}
+
+.addActivity {
+    grid-column: 3;
+    grid-row: 3;
+
+    background-color: var(--secondary);
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 70%;
+    width: 90%;
+
+    text-decoration: none;
+    color: var(--text);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: .5s ease-in-out;
+}
+
+.addActivity:hover {
+    background-color: var(--main);
+}
 
 /**
 ====================
@@ -113,17 +160,21 @@ Page profil
 ====================
 */
 
-main h2 {
+.act  {
     margin: 2em 0 2em 30%;
 }
 
 .entetePr {
     margin: 0 auto 0 auto;
     width: 40%;
+    height: 20em;
     display: grid;
-    grid-template-columns: auto auto;
-    grid-template-rows: auto auto auto;
-    border: solid red 1px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+
+.entetePr > * {
+    margin: 0;
 }
 
 .name {
@@ -138,16 +189,74 @@ main h2 {
 }
 
 .gender {
-    grid-column: 2;
-    grid-row: 2;
-}
-
-.adresse {
     grid-column: 1;
     grid-row: 3;
 }
 
-.pathology {
+.adresse {
+    grid-column: 1;
+    grid-row: 4;
+}
+
+.pathologies {
     grid-column: 2;
-    grid-row: 3;
+    grid-row: 2/-1;
+
+    display: grid;
+    grid-auto-rows: 2em;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+
+/**
+====================
+
+Fomulaire
+
+====================
+*/
+
+
+form {
+    margin: 0 auto 0 auto;
+    width: 15%;
+    height: auto;
+    
+    display:grid;
+    grid-template-columns: 10% 90%;
+    grid-auto-rows: 3em;
+    
+}
+
+label {
+    grid-column: 1/-1;
+}
+
+input  {
+    grid-column: 2;
+    border: none;
+    border-bottom: solid 1px var(--main);
+    width: 15em;
+    height: 2em;
+}
+
+.error {
+    text-align: center;
+    color: #cd2e2e;
+}
+
+input[type=submit] {
+    background-color: var(--secondary);
+    border: none;
+    margin-top: 2em;
+    width: 80%;
+    grid-column: 1/-1;
+    justify-self: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.conn {
+    text-align: center;
+    margin-bottom: 2em;
 }

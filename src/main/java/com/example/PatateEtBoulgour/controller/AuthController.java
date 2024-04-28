@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributesModelMap;
 
 @Controller
 public class AuthController {
@@ -17,7 +19,7 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/login/process")
-    public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
+    public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model, RedirectAttributes ra) {
         // Vérification des informations d'identification de l'utilisateur
         User user = userService.authenticate(username, password);
         if (user != null) {
@@ -28,9 +30,10 @@ public class AuthController {
             return "redirect:/";
         } else {
             // Redirection vers la page de login
-            model.addAttribute("error", "Echec de authentication");
-            model.addAttribute("username", username);
-            return "forms/login";
+            ra.addFlashAttribute("error", "Echec de authentication");
+            ra.addFlashAttribute("username", username);
+
+            return "redirect:/login";
         }
     }
 

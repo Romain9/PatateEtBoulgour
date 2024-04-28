@@ -7,6 +7,8 @@ import com.example.PatateEtBoulgour.entities.Pathology;
 import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.services.ActivityService;
 import com.example.PatateEtBoulgour.services.UserService;
+
+import ch.qos.logback.core.model.Model;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,16 +43,20 @@ public class HomeController {
     public ModelAndView account() {
         Map<String, Object> m = new HashMap<>();
 
+        ModelAndView mv = new ModelAndView("profile");
+
         User user = userService.getCurrentUser();
         if (user != null){
             m.put("user", user);
 
-            Set<Activity> activities = userService.getUserActivities(user);
+            Set<Activity> activities = activityService.getAllActivities();
+            mv.addObject("user", user);
+            mv.addObject("activities", activities);
+            //mv.addObject("pathologies", pathologies);
             m.put("activities", activities);
         }
 
 
-
-        return new ModelAndView("profile", m);
+        return mv;
     }
 }

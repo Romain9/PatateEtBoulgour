@@ -7,28 +7,18 @@
         <p class="age">{{age}}</p>
         <p class="gender">{{gender}}</p>
         <p class="adresse">{{address}}</p>
-        <ul class="pathology">
+        <div class="pathologies">
             {{#pathologies}}
-                <li>{{label}}</li>
+                <p class="items">{{label}}</p>
             {{/pathologies}}
-        </ul>
+        </div>
     </div>
 {{/user}}
 
 
-<h2>Vos activités</h2>
-<div class="activities">
-{{#activities}}
+<h2 class="act">Vos activités</h2>
 
-    <p class="activity">{{label}}</p>
-
-{{/activities}}
-{{^activities}}
-
-    <h3>Aucune activité</h3>
-
-{{/activities}}
-</div>
+{{>components/activities}}
 
 
 
