@@ -1,5 +1,6 @@
 package com.example.PatateEtBoulgour.services;
 import com.example.PatateEtBoulgour.entities.Activity;
+import com.example.PatateEtBoulgour.enums.Role;
 import com.example.PatateEtBoulgour.services.PasswordService;
 
 import com.example.PatateEtBoulgour.entities.User;
@@ -65,4 +66,13 @@ public class UserService {
     public Set<Activity> getUserActivities(User user){
         return userRepository.findActivitiesByUserId(user.getId());
     }
+
+    public boolean hasRole(String role) {
+        return getCurrentUser().getRole().isHigherOrEqualThan(role);
+    }
+
+    public boolean isLoggedIn() {
+        return getCurrentUser() != null;
+    }
+
 }

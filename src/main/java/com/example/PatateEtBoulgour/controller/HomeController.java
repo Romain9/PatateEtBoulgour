@@ -2,14 +2,12 @@ package com.example.PatateEtBoulgour.controller;
 
 import java.util.*;
 
+import com.example.PatateEtBoulgour.annotations.RequireLogged;
+import com.example.PatateEtBoulgour.annotations.RequireRole;
 import com.example.PatateEtBoulgour.entities.Activity;
-import com.example.PatateEtBoulgour.entities.Pathology;
 import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.services.ActivityService;
 import com.example.PatateEtBoulgour.services.UserService;
-
-import ch.qos.logback.core.model.Model;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,7 +23,7 @@ public class HomeController {
     @Autowired
     private ActivityService activityService;
 
-    @RequestMapping
+    @RequestMapping()
     public ModelAndView home() {
         Map<String, Object> m = new HashMap<>();
 
@@ -38,7 +36,7 @@ public class HomeController {
         return new ModelAndView("index", m);
     }
 
-
+    @RequireLogged
     @RequestMapping("/user")
     public ModelAndView account() {
         Map<String, Object> m = new HashMap<>();
@@ -57,6 +55,7 @@ public class HomeController {
         }
 
 
-        return mv;
+
+        return new ModelAndView("profile", m);
     }
 }
