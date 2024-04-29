@@ -1,15 +1,18 @@
 package com.example.PatateEtBoulgour.services;
 import com.example.PatateEtBoulgour.entities.Activity;
 import com.example.PatateEtBoulgour.enums.Role;
+import com.example.PatateEtBoulgour.repository.ActivityRepository;
 import com.example.PatateEtBoulgour.services.PasswordService;
 
 import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -19,6 +22,8 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ActivityRepository activityRepository;
 
     @Autowired
     private HttpSession session;
@@ -64,7 +69,10 @@ public class UserService {
     }
 
     public Set<Activity> getUserActivities(User user){
-        return userRepository.findActivitiesByUserId(user.getId());
+        Set<Activity> activities = userRepository.findActivitiesByUserId(user.getId());
+        for (Activity activity : activities)
+            activity.setContainsCurrentUser(activity.getParticipants().contains(user));
+        return activities;
     }
 
     public boolean hasRole(String role) {
@@ -74,5 +82,4 @@ public class UserService {
     public boolean isLoggedIn() {
         return getCurrentUser() != null;
     }
-
 }

@@ -35,27 +35,4 @@ public class HomeController {
 
         return new ModelAndView("index", m);
     }
-
-    @RequireLogged
-    @RequestMapping("/user")
-    public ModelAndView account() {
-        Map<String, Object> m = new HashMap<>();
-
-        ModelAndView mv = new ModelAndView("profile");
-
-        User user = userService.getCurrentUser();
-        if (user != null){
-            m.put("user", user);
-
-            Set<Activity> activities = activityService.getAllActivities();
-            mv.addObject("user", user);
-            mv.addObject("activities", activities);
-            //mv.addObject("pathologies", pathologies);
-            m.put("activities", activities);
-        }
-
-
-
-        return new ModelAndView("profile", m);
-    }
 }

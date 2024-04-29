@@ -27,6 +27,9 @@ public class Activity {
     private Double longitude;
     private String address;
 
+    @Transient
+    private boolean containsCurrentUser = false;
+
     @ManyToMany
     private List<Pathology> pathologies;
 
@@ -40,4 +43,7 @@ public class Activity {
     private Set<User> participants;
 
 
+    public void addUser(User user) {
+        participants.add(user);
+    }
 }
