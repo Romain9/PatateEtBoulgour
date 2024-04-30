@@ -1,4 +1,4 @@
-[] Inscription/Connexion
+[X] Inscription/Connexion
 
 [] Page de profil
 
