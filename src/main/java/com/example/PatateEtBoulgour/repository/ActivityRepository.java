@@ -21,5 +21,5 @@ public interface ActivityRepository extends CrudRepository<Activity, Long> {
         save(activity);
     }
 
-    public Set<Activity> findAllByOrderByLabelDesc();
+    public List<Activity> findAllByOrderByLabelDesc();
 }

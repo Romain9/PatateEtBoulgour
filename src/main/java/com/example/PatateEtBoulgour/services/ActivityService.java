@@ -8,6 +8,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -15,11 +16,8 @@ public class ActivityService {
     @Autowired
     ActivityRepository activityRepository;
 
-    public Set<Activity> getAllActivities(){
-        Iterable<Activity> activities = activityRepository.findAllByOrderByLabelDesc();
-        HashSet<Activity> activitiesSet = new HashSet<>();
-        activities.forEach(activitiesSet::add);
-        return activitiesSet;
+    public List<Activity> getAllActivities(){
+        return activityRepository.findAllByOrderByLabelDesc();
     }
 
     public void addUserToActivity(User user, Long activityId) {

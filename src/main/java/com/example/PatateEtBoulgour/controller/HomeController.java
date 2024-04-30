@@ -30,7 +30,7 @@ public class HomeController {
         User user = userService.getCurrentUser();
         if (user != null)  m.put("user", user);
 
-        Set<Activity> activities = activityService.getAllActivities();
+        List<Activity> activities = activityService.getAllActivities();
         m.put("activities", activities);
 
         return new ModelAndView("index", m);
