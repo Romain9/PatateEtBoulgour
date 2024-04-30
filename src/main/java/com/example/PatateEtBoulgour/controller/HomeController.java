@@ -35,7 +35,7 @@ public class HomeController {
 
         Pageable page = PageRequest.of(0, 10);
 
-        if (page.next().isPaged()) {
+        if (!activityService.getAllActivities(page.next()).isEmpty()) {
             m.put("nextPage", 1);
         }
 
@@ -59,16 +59,17 @@ public class HomeController {
 
         Pageable page = PageRequest.of(id, 10);
 
-        if (page.next().isPaged()) {
-            m.put("nextPage", page.next().getPageNumber());
-        }
-
         if (page.hasPrevious()) {
             m.put("previousPage", page.previousOrFirst().getPageNumber());
         }
 
         List<Activity> activities = activityService.getAllActivities(page);
         m.put("activities", activities);
+
+        if (!activityService.getAllActivities(page.next()).isEmpty()) {
+            m.put("nextPage", page.next().getPageNumber());
+        }
+
 
         return new ModelAndView("index", m);
     }
