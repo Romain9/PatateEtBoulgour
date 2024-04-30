@@ -77,6 +77,10 @@ public class User {
         return this.passwordHash;
     }
 
+    public void addActivity(Activity activity) {
+        activities.add(activity);
+    }
+
     public static class UserBuilder {
         public UserBuilder password(String password) {
             this.password = password;
