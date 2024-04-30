@@ -86,8 +86,6 @@ public class UserController {
             m.put("activities", activities);
         }
 
-
-
         return new ModelAndView("profile", m);
     }
 

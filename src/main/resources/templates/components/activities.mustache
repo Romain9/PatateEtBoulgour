@@ -5,9 +5,11 @@
         <a class="label" href="{{url}}">{{label}}</a>
         
         <p class="description">{{description}}</p>
-        {{^containsCurrentUser}}
-            <a class="addActivity" href="/add{{id}}">Ajouter activitées</a>
-        {{/containsCurrentUser}}
+        {{#user}}
+            {{^containsCurrentUser}}
+                <a class="addActivity" href="/add{{id}}">Ajouter activitées</a>
+            {{/containsCurrentUser}}
+        {{/user}}
 
     </div>
 {{/activities}}

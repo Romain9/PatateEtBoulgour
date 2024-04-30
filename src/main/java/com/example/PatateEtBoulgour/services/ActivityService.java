@@ -5,6 +5,7 @@ import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.repository.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -18,6 +19,10 @@ public class ActivityService {
 
     public List<Activity> getAllActivities(){
         return activityRepository.findAllByOrderByLabelDesc();
+    }
+
+    public List<Activity> getAllActivities(Pageable pageable){
+        return activityRepository.findAllByOrderByLabelDesc(pageable);
     }
 
     public void addUserToActivity(User user, Long activityId) {
