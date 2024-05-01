@@ -36,6 +36,8 @@ public class HomeController {
     @GetMapping()
     public String home(Model m) {
         m = search(m, "", 0);
+        m.addAttribute("unlogged", !userService.isLoggedIn());
+
         return "index";
     }
 
@@ -57,6 +59,8 @@ public class HomeController {
     @PostMapping()
     public String homeSearch(@RequestParam("search") String activityKeywords, @RequestParam("page") int numPage, Model m) {
         m = search(m, activityKeywords, numPage);
+        m.addAttribute("unlogged", !userService.isLoggedIn());
+
         return "components/activities";
     }
 }

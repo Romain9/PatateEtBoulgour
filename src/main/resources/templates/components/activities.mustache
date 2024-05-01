@@ -15,6 +15,18 @@
                 <a class="activityAction addActivity" href="/add/{{id}}">Ajouter activité</a>
             {{/containsCurrentUser}}
         {{/unlogged}}
+
+        <div>
+            {{#pathologies}}
+                {{label}}
+            {{/pathologies}}
+        </div>
+
+        <div>
+            {{#diciplines}}
+                {{label}}
+            {{/diciplines}}
+        </div>
 </div>
 
 {{/activities}}
