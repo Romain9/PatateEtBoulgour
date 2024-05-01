@@ -36,7 +36,6 @@ public class HomeController {
     @GetMapping()
     public String home(Model m) {
         m = search(m, "", 0);
-        m.addAttribute("unlogged", !userService.isLoggedIn());
 
         return "index";
     }
@@ -49,7 +48,19 @@ public class HomeController {
 
         m.addAttribute("activities", activities);
 
-        m.addAttribute("user", userService.getCurrentUser());
+        if (userService.isLoggedIn()) {
+            User user = userService.getCurrentUser();
+            m.addAttribute("user", user);
+
+            for (Activity activity : activities) {
+                if (user.getActivities().contains(activity)) {
+                    activity.setContainsCurrentUser(true);
+                }
+            }
+
+        } else {
+            m.addAttribute("unlogged", !userService.isLoggedIn());
+        }
 
         m.addAttribute("nbPage", numPage+1);
 
@@ -59,8 +70,6 @@ public class HomeController {
     @PostMapping()
     public String homeSearch(@RequestParam("search") String activityKeywords, @RequestParam("page") int numPage, Model m) {
         m = search(m, activityKeywords, numPage);
-        m.addAttribute("unlogged", !userService.isLoggedIn());
-
         return "components/activities";
     }
 }
