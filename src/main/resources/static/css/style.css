@@ -157,6 +157,14 @@ Page d'accueil
     background-color: var(--main);
 }
 
+.sortHead {
+    text-align: center;
+}
+
+.sort {
+    margin-bottom: 2em;
+}
+
 /**
 ====================
 
@@ -260,7 +268,7 @@ input[type=submit] {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.conn {
+.sign {
     text-align: center;
     margin-bottom: 2em;
 }

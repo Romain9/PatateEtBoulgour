@@ -2,7 +2,7 @@
 
 [] Page de profil
 
-[] Liste activité + recherche et séléctions
+[X] Liste activité + recherche et séléctions
 
 [] Recommandation 
 
