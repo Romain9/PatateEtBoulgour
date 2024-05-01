@@ -52,21 +52,29 @@ public class HomeController {
             m.put("unlogged", true);
         }
 
+        m.put("nbPage", 0);
+
         if (!activityService.getAllActivities(page.next()).isEmpty()) {
             m.put("nextPage", 1);
         }
-
+        
+        
         m.put("activities", activities);
 
         return new ModelAndView("index", m);
     }
 
     @PostMapping()
-    public String homeSearch(@RequestParam("search") String activityKeywords, Model m) {
-        Set<Activity> activities = activityService.getActivityContainingKeyword(activityKeywords);
+    public String homeSearch(@RequestParam("search") String activityKeywords, @RequestParam("page") int numPage, Model m) {
+
+        Pageable page = PageRequest.of(0, 10*(numPage+1));
+
+        Set<Activity> activities = activityService.getActivityContainingKeyword(activityKeywords, page);
         m.addAttribute("activities", activities);
 
         m.addAttribute("user", userService.getCurrentUser());
+
+        m.addAttribute("nbPage", numPage+1);
 
         return "components/activities";
     }
@@ -95,9 +103,6 @@ public class HomeController {
             m.put("unlogged", true);
         }
 
-        if (page.hasPrevious()) {
-            m.put("previousPage", page.previousOrFirst().getPageNumber());
-        }
 
         m.put("activities", activities);
 

@@ -1,16 +1,21 @@
 
-function asyncSearch() {
+function asyncSearch(element) {
     var search = $('#search').val();
-    console.log("value: "+$('#label').attr('href'));
+    var nb = $('#activities').data("page");
+
+    if (element.tagName == "INPUT") {
+        nb = 0;
+    }
+    else {
+        nb++;
+    }
     
     $.ajax({
         type: "POST",
         url: "/",
         data: {
-            search: search
-        },
-        beforeSend: function() {
-
+            search: search,
+            page: nb
         },
         success: function (response) {
             $("body")

@@ -35,6 +35,13 @@ public class ActivityService {
         return activitiesSet;
     }
 
+    public Set<Activity> getActivityContainingKeyword(String keyword, Pageable pageable) {
+        Iterable<Activity> activities = activityRepository.findByContainsLabelOrDescription(keyword, pageable);
+        HashSet<Activity> activitiesSet = new HashSet<>();
+        activities.forEach(activitiesSet::add);
+        return activitiesSet;
+    }
+
     public void addUserToActivity(User user, Long activityId) {
         Activity activity = activityRepository.findById(activityId).orElse(null);
         if(activity == null) throw new EmptyResultDataAccessException("Activity not found", 1);
