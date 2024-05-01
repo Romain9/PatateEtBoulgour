@@ -1,7 +1,13 @@
 <h2 class="sortHead">Recherche:</h2>
 <form>
 
-    <input id="search" type="text" name="search" onkeyup="asyncSearch()">
+    <input id="search" type="text" name="search" onkeyup="asyncSearch(this)">
+
+    <select name="sortOption">
+        <option value="titre">Titre</option>
+        <option value="description">Description</option>
+        <option value="pathologies">Pathologies</option>
+    </select>
 
     <!--<div class="spinner"></div>-->
 </form>

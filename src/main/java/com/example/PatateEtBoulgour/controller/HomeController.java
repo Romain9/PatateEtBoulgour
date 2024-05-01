@@ -33,23 +33,21 @@ public class HomeController {
     @Autowired
     private ActivityService activityService;
 
-    @GetMapping()
+    @RequestMapping()
     public ModelAndView home() {
         Map<String, Object> m = new HashMap<>();
-        
 
         User user = userService.getCurrentUser();
         if (user != null)  m.put("user", user);
                 
-
         Pageable page = PageRequest.of(0, 10);
         List<Activity> activities = activityService.getAllActivities(page);
 
+        m.put("nbPage", 0);
          
         if (!activityService.getAllActivities(page.next()).isEmpty()) {
             m.put("nextPage", 1);
         }
-        
         
         m.put("activities", activities);
 
@@ -57,42 +55,18 @@ public class HomeController {
     }
 
     @PostMapping()
-    public String homeSearch(@RequestParam("search") String activityKeywords, Model m) {
-        Set<Activity> activities = activityService.getActivityContainingKeyword(activityKeywords);
-        m.addAttribute("activities", activities);
+    public String homeSearch(@RequestParam("search") String activityKeywords, @RequestParam("page") int numPage, Model m) {
 
+        Pageable page = PageRequest.of(0, 10*(numPage+1));
+
+        Set<Activity> activities = activityService.getActivityContainingKeyword(activityKeywords, page);
+        m.addAttribute("activities", activities);
         
         m.addAttribute("user", userService.getCurrentUser());
+
+        m.addAttribute("nbPage", numPage+1);
 
         return "components/activities";
     }
     
-    @RequestMapping("/{id}")
-    public ModelAndView getActivityForPage(@PathVariable int id) {
-        Map<String, Object> m = new HashMap<>();
-
-        if (id < 0) {
-            m.put("errorMessage", "Eh oh, tu arrêtes!");
-            return new ModelAndView("redirect:/");
-        }
-
-        User user = userService.getCurrentUser();
-        if (user != null)  m.put("user", user);
-
-        Pageable page = PageRequest.of(id, 10);
-
-        if (page.hasPrevious()) {
-            m.put("previousPage", page.previousOrFirst().getPageNumber());
-        }
-
-        List<Activity> activities = activityService.getAllActivities(page);
-        m.put("activities", activities);
-
-        if (!activityService.getAllActivities(page.next()).isEmpty()) {
-            m.put("nextPage", page.next().getPageNumber());
-        }
-
-
-        return new ModelAndView("index", m);
-    }
 }
