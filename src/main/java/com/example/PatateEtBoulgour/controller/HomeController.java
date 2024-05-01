@@ -43,7 +43,7 @@ public class HomeController {
 
         Pageable page = PageRequest.of(0, 10*(numPage+1));
 
-        Set<Activity> activities = activityService.getActivityContainingKeyword(activityKeywords, page);
+        List<Activity> activities = activityService.getActivityContainingKeyword(activityKeywords, page);
 
         m.addAttribute("activities", activities);
 
