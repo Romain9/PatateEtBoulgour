@@ -5,6 +5,7 @@ import com.example.PatateEtBoulgour.entities.Activity;
 import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.exception.InvalidAddressException;
 import com.example.PatateEtBoulgour.exception.InvalidApiResponse;
+import com.example.PatateEtBoulgour.repository.ActivityRepository;
 import com.example.PatateEtBoulgour.services.ActivityService;
 import com.example.PatateEtBoulgour.services.AddressService;
 import com.example.PatateEtBoulgour.services.UserService;
@@ -20,6 +21,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 public class UserController {
@@ -28,6 +32,8 @@ public class UserController {
 
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private ActivityRepository activityRepository;
     @Autowired
     private ActivityService activityService;
 
@@ -77,16 +83,16 @@ public class UserController {
 
         User user = userService.getCurrentUser();
         if (user != null){
-            m.put("user", user);
 
             Set<Activity> activities = userService.getUserActivities(user);
+            boolean truc = false;
 
             mv.addObject("user", user);
             mv.addObject("activities", activities);
-            m.put("activities", activities);
+            mv.addObject("selected", "truc");
         }
 
-        return new ModelAndView("profile", m);
+        return mv;
     }
 
     @GetMapping("add/{activityId}")
@@ -95,4 +101,16 @@ public class UserController {
         activityService.addUserToActivity(user, activityId);
         return "redirect:/";
     }
+
+    @PostMapping("remove/{activityId}") 
+    public String removeActivity(@PathVariable("activityId") Long activityId) {
+        User user = userService.getCurrentUser();
+
+        Activity a = activityRepository.findById(activityId).get();
+
+        user.getActivities().removeIf(act -> act.getId().equals(a.getId()));
+
+        return "redirect:/user";
+    }
+    
 }

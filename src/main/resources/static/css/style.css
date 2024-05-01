@@ -133,11 +133,10 @@ Page d'accueil
     margin: 1em 1em 0 1em;
 }
 
-.addActivity {
+.activityAction {
     grid-column: 3;
     grid-row: 3;
 
-    background-color: var(--secondary);
     border-top-left-radius: 10px;
     border-bottom-right-radius: 10px;
     height: 70%;
@@ -153,8 +152,20 @@ Page d'accueil
     transition: .5s ease-in-out;
 }
 
+.addActivity {
+    background-color: var(--secondary);
+}
+
+.removeActivity {
+    background-color: #e48383;
+}
+
 .addActivity:hover {
     background-color: var(--main);
+}
+
+.removeActivity:hover {
+    background-color: #c04e4e;
 }
 
 .sortHead {
@@ -163,6 +174,16 @@ Page d'accueil
 
 .sort {
     margin-bottom: 2em;
+}
+
+.spinner {
+    width: auto;
+    height: 100px;
+    background: rgba(255, 255, 255, 0) url(https://upload.wikimedia.org/wikipedia/commons/9/92/Loading_icon_cropped.gif) 10% 10% no-repeat;
+}
+
+body .loading .spinner {
+    display: block;
 }
 
 /**

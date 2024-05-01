@@ -1,18 +1,25 @@
 
 function asyncSearch() {
     var search = $('#search').val();
-    console.log($('#activities').children.length);
+    console.log("value: "+$('#label').attr('href'));
+    
     $.ajax({
         type: "POST",
-        url: "/search",
+        url: "/",
         data: {
-            query: search
+            search: search
+        },
+        beforeSend: function() {
+
         },
         success: function (response) {
-            $('#activities').html(response)
+            $("body")
+            $('#activities').replaceWith(response);
         },
         error: function(xhr, status, error) {
+            console.log("xhr: "+xhr+"status: "+status+"\nerror: "+error);
             console.error('Error searching activities: ' + error);
         }
     });
 }
+

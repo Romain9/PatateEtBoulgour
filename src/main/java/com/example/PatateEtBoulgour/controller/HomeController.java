@@ -11,6 +11,7 @@ import com.example.PatateEtBoulgour.services.UserService;
 
 import org.h2.engine.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -35,28 +36,35 @@ public class HomeController {
     @GetMapping()
     public ModelAndView home() {
         Map<String, Object> m = new HashMap<>();
+        
 
         User user = userService.getCurrentUser();
         if (user != null)  m.put("user", user);
+                
 
         Pageable page = PageRequest.of(0, 10);
+        List<Activity> activities = activityService.getAllActivities(page);
 
+         
         if (!activityService.getAllActivities(page.next()).isEmpty()) {
             m.put("nextPage", 1);
         }
-
-        List<Activity> activities = activityService.getAllActivities(page);
+        
+        
         m.put("activities", activities);
 
         return new ModelAndView("index", m);
     }
 
-    @PostMapping("/search")
+    @PostMapping()
     public String homeSearch(@RequestParam("search") String activityKeywords, Model m) {
         Set<Activity> activities = activityService.getActivityContainingKeyword(activityKeywords);
         m.addAttribute("activities", activities);
 
-        return "activities :: activities";
+        
+        m.addAttribute("user", userService.getCurrentUser());
+
+        return "components/activities";
     }
     
     @RequestMapping("/{id}")

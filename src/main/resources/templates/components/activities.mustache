@@ -2,15 +2,18 @@
 
 <div class="activities" id="activities">
 {{#activities}}
-    <div class="activity items" >
+    <div class="activity items" id="item">
     
-        <a class="label" href="{{url}}">{{label}}</a>
+        <a class="label" href="{{url}}" id="label">{{label}}</a>
         
         <p class="description">{{description}}</p>
         {{#user}}
-            {{^containsCurrentUser}}
-                <a class="addActivity" href="/add/{{id}}">Ajouter activitées</a>
-            {{/containsCurrentUser}}
+            {{#selected}}
+                <a class="activityAction removeActivity" href="/remove/{{id}}">Retirer activité</a>
+            {{/selected}}
+            {{^selected}}
+                <a class="activityAction addActivity" href="/add/{{id}}">Ajouter activité</a>
+            {{/selected}}
         {{/user}}
     </div>
 
