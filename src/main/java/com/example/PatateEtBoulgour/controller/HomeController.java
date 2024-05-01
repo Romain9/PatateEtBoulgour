@@ -103,7 +103,6 @@ public class HomeController {
             m.put("unlogged", true);
         }
 
-
         m.put("activities", activities);
 
         if (!activityService.getAllActivities(page.next()).isEmpty()) {
