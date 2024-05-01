@@ -22,8 +22,6 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private ActivityRepository activityRepository;
 
     @Autowired
     private HttpSession session;
@@ -41,6 +39,16 @@ public class UserService {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("admin/addNewUser");
         return modelAndView;
+    }
+
+    public void removeActivity(User user, Activity activity) {
+       user.removeActivity(activity);
+       userRepository.saveAndFlush(user);
+    }
+
+    public void addActivity(User user, Activity activity) {
+        user.addActivity(activity);
+        userRepository.saveAndFlush(user);
     }
 
     public void createUser(User user) {
@@ -69,10 +77,7 @@ public class UserService {
     }
 
     public Set<Activity> getUserActivities(User user){
-        Set<Activity> activities = userRepository.findActivitiesByUserId(user.getId());
-        for (Activity activity : activities)
-            activity.setContainsCurrentUser(activity.getParticipants().contains(user));
-        return activities;
+        return user.getActivities();
     }
 
     public boolean hasRole(String role) {

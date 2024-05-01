@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -36,14 +37,19 @@ public class Activity {
     @ManyToMany
     private List<Discipline> disciplines;
 
-    @ManyToMany
-    @JoinTable(name = "user_activity",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "activity_id"))
-    private Set<User> participants;
+    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+    Set<User> participants;
 
+    public boolean userIsParticipant(User user) {
+        return participants.contains(user);
+    }
 
-    public void addUser(User user) {
-        participants.add(user);
+    public boolean equals(Activity o) {
+        return Objects.equals(o.getId(), this.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getLabel(), getDescription(), getUrl(), getLatitude(), getLongitude(), getAddress());
     }
 }

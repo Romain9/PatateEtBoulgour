@@ -5,17 +5,17 @@
     <div class="activity items" id="item">
     
         <a class="label" href="{{url}}" id="label">{{label}}</a>
-        
+
         <p class="description">{{description}}</p>
-        {{#user}}
-            {{#selected}}
+        {{^unlogged}}
+            {{#containsCurrentUser}}
                 <a class="activityAction removeActivity" href="/remove/{{id}}">Retirer activité</a>
-            {{/selected}}
-            {{^selected}}
+            {{/containsCurrentUser}}
+            {{^containsCurrentUser}}
                 <a class="activityAction addActivity" href="/add/{{id}}">Ajouter activité</a>
-            {{/selected}}
-        {{/user}}
-    </div>
+            {{/containsCurrentUser}}
+        {{/unlogged}}
+</div>
 
 {{/activities}}
 {{^activities}}

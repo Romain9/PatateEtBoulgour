@@ -17,6 +17,9 @@ public class ActivityService {
     @Autowired
     ActivityRepository activityRepository;
 
+    @Autowired
+    UserService userService;
+
     public List<Activity> getAllActivities(){
         return activityRepository.findAllByOrderByLabelDesc();
     }
@@ -36,5 +39,6 @@ public class ActivityService {
         Activity activity = activityRepository.findById(activityId).orElse(null);
         if(activity == null) throw new EmptyResultDataAccessException("Activity not found", 1);
         activityRepository.addUser(user, activity);
+        activityRepository.saveAndFlush(activity);
     }
 }

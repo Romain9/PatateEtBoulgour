@@ -36,21 +36,26 @@ public class HomeController {
     @GetMapping()
     public ModelAndView home() {
         Map<String, Object> m = new HashMap<>();
-        
-
-        User user = userService.getCurrentUser();
-        if (user != null)  m.put("user", user);
-                
 
         Pageable page = PageRequest.of(0, 10);
         List<Activity> activities = activityService.getAllActivities(page);
 
-         
+        User user = userService.getCurrentUser();
+        if (user != null) {
+            m.put("user", user);
+            for (Activity activity : activities) {
+                if (user.getActivities().contains(activity)) {
+                    activity.setContainsCurrentUser(true);
+                }
+            }
+        } else {
+            m.put("unlogged", true);
+        }
+
         if (!activityService.getAllActivities(page.next()).isEmpty()) {
             m.put("nextPage", 1);
         }
-        
-        
+
         m.put("activities", activities);
 
         return new ModelAndView("index", m);
@@ -61,7 +66,6 @@ public class HomeController {
         Set<Activity> activities = activityService.getActivityContainingKeyword(activityKeywords);
         m.addAttribute("activities", activities);
 
-        
         m.addAttribute("user", userService.getCurrentUser());
 
         return "components/activities";
@@ -76,22 +80,30 @@ public class HomeController {
             return new ModelAndView("redirect:/");
         }
 
-        User user = userService.getCurrentUser();
-        if (user != null)  m.put("user", user);
-
         Pageable page = PageRequest.of(id, 10);
+        List<Activity> activities = activityService.getAllActivities(page);
+
+        User user = userService.getCurrentUser();
+        if (user != null) {
+            m.put("user", user);
+            for (Activity activity : activities) {
+                if (user.getActivities().contains(activity)) {
+                    activity.setContainsCurrentUser(true);
+                }
+            }
+        } else {
+            m.put("unlogged", true);
+        }
 
         if (page.hasPrevious()) {
             m.put("previousPage", page.previousOrFirst().getPageNumber());
         }
 
-        List<Activity> activities = activityService.getAllActivities(page);
         m.put("activities", activities);
 
         if (!activityService.getAllActivities(page.next()).isEmpty()) {
             m.put("nextPage", page.next().getPageNumber());
         }
-
 
         return new ModelAndView("index", m);
     }

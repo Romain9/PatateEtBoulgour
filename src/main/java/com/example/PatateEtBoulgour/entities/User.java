@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import org.checkerframework.common.aliasing.qual.Unique;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -62,10 +63,10 @@ public class User {
     @Pattern(regexp = "^(\\d+)\\s+(.+)\\s*,\\s*(\\d{5})\\s+(.+)$", message = "Format d'adresse invalide: Numéro Nom Rue, Code Postal Ville")
     private String address; // Format: Numéro de rue Nom de rue, Code postal Ville
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Pathology> pathologies;
 
-    @ManyToMany(mappedBy = "participants", fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<Activity> activities;
 
     public void setPassword(String password) {
@@ -79,6 +80,18 @@ public class User {
 
     public void addActivity(Activity activity) {
         activities.add(activity);
+    }
+
+    public void removeActivity(Activity activity) {
+        activities.remove(activity);
+    }
+
+    public void addPathology(Pathology pathology) {
+        pathologies.add(pathology);
+    }
+
+    public void removePathology(Pathology pathology) {
+        pathologies.remove(pathology);
     }
 
     public static class UserBuilder {
@@ -102,6 +115,15 @@ public class User {
         this.age = age;
         this.gender = gender;
         this.address = address;
+    }
+
+    public boolean equals(User o) {
+      return getId().equals(o.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getPasswordHash(), getUsername(), getRole(), getPassword(), getLastName(), getFirstName(), getEmail(), getAge(), getGender(), getAddress());
     }
 }
 

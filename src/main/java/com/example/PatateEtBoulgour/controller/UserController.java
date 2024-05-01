@@ -88,27 +88,32 @@ public class UserController {
             boolean truc = false;
 
             mv.addObject("user", user);
+
+            for (Activity activity : activities) {
+                activity.setContainsCurrentUser(true);
+            }
+
             mv.addObject("activities", activities);
-            mv.addObject("selected", "truc");
         }
 
         return mv;
     }
 
+    @RequireLogged
     @GetMapping("add/{activityId}")
     public String addActivity(@PathVariable("activityId") Long activityId) {
         User user = userService.getCurrentUser();
-        activityService.addUserToActivity(user, activityId);
+        userService.addActivity(user, activityRepository.findById(activityId).get());
         return "redirect:/";
     }
 
-    @PostMapping("remove/{activityId}") 
+    @RequireLogged
+    @GetMapping("remove/{activityId}")
     public String removeActivity(@PathVariable("activityId") Long activityId) {
         User user = userService.getCurrentUser();
 
-        Activity a = activityRepository.findById(activityId).get();
-
-        user.getActivities().removeIf(act -> act.getId().equals(a.getId()));
+        Activity activity = activityRepository.findById(activityId).get();
+        userService.removeActivity(user, activity);
 
         return "redirect:/user";
     }

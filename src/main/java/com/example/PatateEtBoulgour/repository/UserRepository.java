@@ -25,4 +25,6 @@ public interface UserRepository  extends JpaRepository<User, Long> {
     Set<Activity> findActivitiesByUserId(Long userId);
 
 
+
+
 }
