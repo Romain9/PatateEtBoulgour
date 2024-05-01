@@ -35,11 +35,8 @@ public class ActivityService {
         return activitiesSet;
     }
 
-    public Set<Activity> getActivityContainingKeyword(String keyword, Pageable pageable) {
-        Iterable<Activity> activities = activityRepository.findByContainsLabelOrDescription(keyword, pageable);
-        HashSet<Activity> activitiesSet = new HashSet<>();
-        activities.forEach(activitiesSet::add);
-        return activitiesSet;
+    public List<Activity> getActivityContainingKeyword(String keyword, Pageable pageable) {
+        return activityRepository.findByContainsLabelOrDescription(keyword, pageable);
     }
 
     public void addUserToActivity(User user, Long activityId) {
