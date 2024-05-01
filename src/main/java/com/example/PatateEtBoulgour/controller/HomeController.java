@@ -11,8 +11,11 @@ import com.example.PatateEtBoulgour.services.UserService;
 
 import org.h2.engine.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +39,13 @@ public class HomeController {
         User user = userService.getCurrentUser();
         if (user != null)  m.put("user", user);
 
-        Set<Activity> activities = activityService.getAllActivities();
+        Pageable page = PageRequest.of(0, 10);
+
+        if (!activityService.getAllActivities(page.next()).isEmpty()) {
+            m.put("nextPage", 1);
+        }
+
+        List<Activity> activities = activityService.getAllActivities(page);
         m.put("activities", activities);
 
         return new ModelAndView("index", m);
@@ -48,5 +57,34 @@ public class HomeController {
         m.addAttribute("activities", activities);
 
         return "activities :: activities";
+    }
+    
+    @RequestMapping("/{id}")
+    public ModelAndView getActivityForPage(@PathVariable int id) {
+        Map<String, Object> m = new HashMap<>();
+
+        if (id < 0) {
+            m.put("errorMessage", "Eh oh, tu arrêtes!");
+            return new ModelAndView("redirect:/");
+        }
+
+        User user = userService.getCurrentUser();
+        if (user != null)  m.put("user", user);
+
+        Pageable page = PageRequest.of(id, 10);
+
+        if (page.hasPrevious()) {
+            m.put("previousPage", page.previousOrFirst().getPageNumber());
+        }
+
+        List<Activity> activities = activityService.getAllActivities(page);
+        m.put("activities", activities);
+
+        if (!activityService.getAllActivities(page.next()).isEmpty()) {
+            m.put("nextPage", page.next().getPageNumber());
+        }
+
+
+        return new ModelAndView("index", m);
     }
 }

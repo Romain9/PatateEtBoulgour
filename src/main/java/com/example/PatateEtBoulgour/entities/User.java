@@ -62,10 +62,10 @@ public class User {
     @Pattern(regexp = "^(\\d+)\\s+(.+)\\s*,\\s*(\\d{5})\\s+(.+)$", message = "Format d'adresse invalide: Numéro Nom Rue, Code Postal Ville")
     private String address; // Format: Numéro de rue Nom de rue, Code postal Ville
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Pathology> pathologies;
 
-    @ManyToMany(mappedBy = "participants")
+    @ManyToMany(mappedBy = "participants", fetch = FetchType.EAGER)
     private Set<Activity> activities;
 
     public void setPassword(String password) {

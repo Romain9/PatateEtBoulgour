@@ -7,15 +7,23 @@
         <a class="label" href="{{url}}">{{label}}</a>
         
         <p class="description">{{description}}</p>
-        {{^containsCurrentUser}}
-            <a class="addActivity" href="/add{{id}}">Ajouter activitées</a>
-        {{/containsCurrentUser}}
-
+        {{#user}}
+            {{^containsCurrentUser}}
+                <a class="addActivity" href="/add/{{id}}">Ajouter activitées</a>
+            {{/containsCurrentUser}}
+        {{/user}}
     </div>
+
 {{/activities}}
 {{^activities}}
-
     <h3>Aucune activité</h3>
-
 {{/activities}}
 </div>
+
+{{#previousPage}}
+    <a href="./{{previousPage}}">Précédente</a>
+{{/previousPage}}
+
+{{#nextPage}}
+    <a href="./{{nextPage}}">Suivante</a>
+{{/nextPage}}

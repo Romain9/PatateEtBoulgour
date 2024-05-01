@@ -86,12 +86,10 @@ public class UserController {
             m.put("activities", activities);
         }
 
-
-
         return new ModelAndView("profile", m);
     }
 
-    @GetMapping("add{activityId}")
+    @GetMapping("add/{activityId}")
     public String addActivity(@PathVariable("activityId") Long activityId) {
         User user = userService.getCurrentUser();
         activityService.addUserToActivity(user, activityId);

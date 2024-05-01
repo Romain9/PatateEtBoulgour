@@ -2,6 +2,8 @@ package com.example.PatateEtBoulgour.repository;
 
 import com.example.PatateEtBoulgour.entities.Activity;
 import com.example.PatateEtBoulgour.entities.User;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -13,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @Repository
-public interface ActivityRepository extends CrudRepository<Activity, Long> {
+public interface ActivityRepository extends JpaRepository<Activity, Long> {
     public Activity findById(long id);
 
     @Transactional
@@ -27,4 +29,6 @@ public interface ActivityRepository extends CrudRepository<Activity, Long> {
 
     @Query("SELECT a FROM Activity a WHERE a.label LIKE CONCAT('%', :keyword, '%') OR a.description LIKE CONCAT('%', :keyword, '%')")
     public List<Activity> findByContainsLabelOrDescription(@Param("keyword") String keyword);
+    public List<Activity> findAllByOrderByLabelDesc(Pageable page);
+
 }
