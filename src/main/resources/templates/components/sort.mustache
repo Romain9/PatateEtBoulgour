@@ -1,5 +1,5 @@
 <h2 class="sortHead">Recherche par:</h2>
-<form method="POST">
+<form method="POST" id="searchForm">
 
     <select id="sortOptions" name="sortOption" onchange="loadDatalist(this.value, 'searchList')">
         <option value="titre">Titre</option>
@@ -8,7 +8,7 @@
         <option value="disciplines">Diciplines</option>
     </select>
 
-    <input id="search" type="text" name="search" list="searchList" onkeyup="asyncSearch(this)" autocomplete="off">
+    <input id="search" type="text" name="search" list="searchList" onkeydown="asyncSearch(this)" autocomplete="off">
 
     <datalist id="searchList">
     </datalist>
@@ -19,6 +19,12 @@
     $(document).ready(function() {
         $('#search').val('');
         loadDatalist('titre', 'searchList')
+
+        $('#searchForm').submit(function(event) {
+            event.preventDefault();
+            asyncSearch($('#search').val());
+        });
+
     });
 
     $('#search').on('focus', function() {
