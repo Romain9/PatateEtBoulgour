@@ -40,16 +40,16 @@ public class ActivityService {
 
         switch (opt) {
             case "titre":
-                act = activityRepository.findByContainsLabelOrDescription(keyword, pageable);
+                act = activityRepository.findByContainsLabel(keyword, pageable);
                 break;
             case "description":
-                act = activityRepository.findByContainsLabelOrDescription(keyword, pageable);
+                act = activityRepository.findByContainsDescription(keyword, pageable);
                 break;
             case "pathologies":
-                act = activityRepository.findByContainsLabelOrDescription(keyword, pageable);
+                act = activityRepository.findActivitiesByPathologyLabel(keyword, pageable);
                 break;
             case "disciplines":
-                act = activityRepository.findByContainsLabelOrDescription(keyword, pageable);
+                act = activityRepository.findActivitiesByDisciplineLabel(keyword, pageable);
                 break;
             default:
                 act = activityRepository.findByContainsLabelOrDescription(keyword, pageable);
