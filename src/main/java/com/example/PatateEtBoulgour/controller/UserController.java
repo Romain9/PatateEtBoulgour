@@ -2,13 +2,16 @@ package com.example.PatateEtBoulgour.controller;
 
 import com.example.PatateEtBoulgour.annotations.RequireLogged;
 import com.example.PatateEtBoulgour.entities.Activity;
+import com.example.PatateEtBoulgour.entities.Pathology;
 import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.exception.InvalidAddressException;
 import com.example.PatateEtBoulgour.exception.InvalidApiResponse;
 import com.example.PatateEtBoulgour.repository.ActivityRepository;
+import com.example.PatateEtBoulgour.repository.PathologyRepository;
 import com.example.PatateEtBoulgour.services.AddressService;
 import com.example.PatateEtBoulgour.services.UserService;
 import jakarta.validation.Valid;
+import org.h2.engine.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -30,8 +34,12 @@ public class UserController {
     @Autowired
     private ActivityRepository activityRepository;
 
-    @PostMapping("/createUser")
-    public String createUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+    @Autowired
+    private PathologyRepository pathologyRepository;
+
+
+    @PostMapping("/register")
+    public String createUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model, RedirectAttributes ra) {
 
         // Récupération des erreurs si existantes.
         List<String> errorMessages = new ArrayList<>();
@@ -53,17 +61,22 @@ public class UserController {
 
         // Renvoie vers le formulaire avec les erreurs
         if (!errorMessages.isEmpty()) {
+            List<Pathology> pathologies = pathologyRepository.findAll();
+            model.addAttribute("pathologies", pathologies);
             return "forms/newUserForm";
         }
 
-        // Enregistrement de l'utilisateur
         userService.createUser(user);
-        return "redirect:/admin/user-list";
+
+        ra.addFlashAttribute("success", "Utilisateur créé avec succès! Veuillez vous connecter");
+        return "redirect:/login";
 
     }
 
-    @GetMapping("/createUser")
-    public String createUser() {
+    @GetMapping("/register")
+    public String createUser(Model model) {
+        List<Pathology> pathologies = pathologyRepository.findAll();
+        model.addAttribute("pathologies", pathologies);
         return "forms/newUserForm";
     }
 

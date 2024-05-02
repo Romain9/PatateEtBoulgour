@@ -63,8 +63,8 @@ public class User {
     @Pattern(regexp = "^(\\d+)\\s+(.+)\\s*,\\s*(\\d{5})\\s+(.+)$", message = "Format d'adresse invalide: Numéro Nom Rue, Code Postal Ville")
     private String address; // Format: Numéro de rue Nom de rue, Code postal Ville
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<Pathology> pathologies;
+    @OneToOne
+    private Pathology pathology;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<Activity> activities;
@@ -89,13 +89,6 @@ public class User {
         activities.remove(activity);
     }
 
-    public void addPathology(Pathology pathology) {
-        pathologies.add(pathology);
-    }
-
-    public void removePathology(Pathology pathology) {
-        pathologies.remove(pathology);
-    }
 
     public static class UserBuilder {
         public UserBuilder password(String password) {

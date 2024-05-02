@@ -6,7 +6,7 @@
     <p>{{this}}</p>
 {{/errors}}
 
-<form action="/createUser" method="post">
+<form action="/register" method="post">
 
 
     <label for="username">Nom d'utilisateur :</label>
@@ -39,11 +39,17 @@
         <option value="Female" {{#user.gender}}selected{{/user.gender}}>Féminin</option>
         <option value="Non-Binaire" {{#user.gender}}selected{{/user.gender}}>Non Binaire</option>
     </select>
-    
 
     <label for="address">Adresse :</label>
     <input id="address" name="address" value="{{#user.address}}{{.}}{{/user.address}}" required>
-    
+
+    <label for="pathology">Pathology :</label>
+    <select id="pathology" name="pathology" required>
+        {{#pathologies}}
+            <option value="{{id}}" {{#user.pathology.id}}selected{{/user.pathology.id}}>{{label}}</option>
+        {{/pathologies}}
+    </select>
+
 
     <input type="submit" value="Enregistrer">
 </form>

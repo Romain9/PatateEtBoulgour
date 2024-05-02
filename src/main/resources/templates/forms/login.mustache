@@ -4,9 +4,11 @@
 {{#error}}
         <p class="error"><strong>Erreur:</strong> {{this}}</p>
     {{/error}}
-<form action="/login/process" method="post">
 
-    
+{{#success}}
+    <p class="success"><strong>Youpi:</strong> {{this}}</p>
+{{/success}}
+<form action="/login/process" method="post">
 
     <label for="username">Nom d'utilisateur:</label>
     <input type="text" id="username" name="username" {{#username}}value="{{username}}"{{/username}} required>

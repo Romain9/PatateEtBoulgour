@@ -16,7 +16,7 @@ public interface UserRepository  extends JpaRepository<User, Long> {
     List<User> findByAgeGreaterThanEqual(int age);
     List<User> findByGender(String gender);
     List<User> findByAddress(String address);
-    List<User> findByPathologies_Label(String pathologyName);
+
     List<User> findByActivities_Label(String activityName);
     @Query("SELECT a FROM User u JOIN u.activities a WHERE u.id = :userId")
     Set<Activity> findActivitiesByUserId(Long userId);

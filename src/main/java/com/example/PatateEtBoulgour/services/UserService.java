@@ -52,7 +52,7 @@ public class UserService {
     }
 
     public void createUser(User user) {
-        userRepository.save(user);
+        userRepository.saveAndFlush(user);
     }
 
     public User authenticate(String username, String password) {

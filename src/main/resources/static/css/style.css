@@ -279,6 +279,11 @@ input, select  {
     color: #cd2e2e;
 }
 
+.success {
+    text-align: center;
+    color: #79ff00;
+}
+
 input[type=submit] {
     background-color: var(--secondary);
     border: none;
