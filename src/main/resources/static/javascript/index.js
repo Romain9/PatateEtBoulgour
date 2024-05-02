@@ -30,17 +30,17 @@ function asyncSearch(element) {
     });
 }
 
-function loadDatalist (endpoint) {
+function loadDatalist (endpoint, datalist) {
     $.ajax({
         url: '/api/search/' + endpoint,
         type: 'GET',
         dataType: 'json',
         success: function(response) {
 
-            $('#searchList').empty();
+            $('#' + datalist).empty();
 
             $.each(response, function(index, value) {
-                $('#searchList').append('<option value="' + value + '">');
+                $('#' + datalist).append('<option value="' + value + '">');
             });
         },
         error: function(xhr, status, error) {
