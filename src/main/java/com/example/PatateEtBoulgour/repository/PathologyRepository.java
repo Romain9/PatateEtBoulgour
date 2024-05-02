@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface PathologyRepository extends JpaRepository<Pathology, Long> {
+    
     @Query("select label from Pathology")
     List<String> getAllLabel();
 

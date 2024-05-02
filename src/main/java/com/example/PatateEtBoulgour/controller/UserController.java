@@ -9,6 +9,7 @@ import com.example.PatateEtBoulgour.exception.InvalidApiResponse;
 import com.example.PatateEtBoulgour.repository.ActivityRepository;
 import com.example.PatateEtBoulgour.repository.PathologyRepository;
 import com.example.PatateEtBoulgour.services.AddressService;
+import com.example.PatateEtBoulgour.services.PathologyService;
 import com.example.PatateEtBoulgour.services.UserService;
 import jakarta.validation.Valid;
 import org.h2.engine.Mode;
@@ -33,6 +34,8 @@ public class UserController {
     private AddressService addressService;
     @Autowired
     private ActivityRepository activityRepository;
+    @Autowired
+    private PathologyService pathologyService;
 
     @Autowired
     private PathologyRepository pathologyRepository;
@@ -47,6 +50,9 @@ public class UserController {
         bindingResult.getGlobalErrors().forEach(globalError -> errorMessages.add(globalError.getDefaultMessage()));
         model.addAttribute("errors", errorMessages);
         model.addAttribute("user", user);
+
+        List<Pathology> allPathologies = pathologyService.getAllPathologies();
+        model.addAttribute("allPathologies", allPathologies);
 
         // Pas d'erreur, vérification de l'addresse via l'API du gouvernement
         if (!bindingResult.hasErrors()) {
