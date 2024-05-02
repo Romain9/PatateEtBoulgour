@@ -6,23 +6,18 @@ import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.exception.InvalidAddressException;
 import com.example.PatateEtBoulgour.exception.InvalidApiResponse;
 import com.example.PatateEtBoulgour.repository.ActivityRepository;
-import com.example.PatateEtBoulgour.services.ActivityService;
 import com.example.PatateEtBoulgour.services.AddressService;
 import com.example.PatateEtBoulgour.services.UserService;
-import jakarta.validation.OverridesAttribute;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
-import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -34,8 +29,6 @@ public class UserController {
     private AddressService addressService;
     @Autowired
     private ActivityRepository activityRepository;
-    @Autowired
-    private ActivityService activityService;
 
     @PostMapping("/createUser")
     public String createUser(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
@@ -77,15 +70,12 @@ public class UserController {
     @RequireLogged
     @RequestMapping("/user")
     public ModelAndView account() {
-        Map<String, Object> m = new HashMap<>();
-
         ModelAndView mv = new ModelAndView("profile");
 
         User user = userService.getCurrentUser();
         if (user != null){
 
             Set<Activity> activities = userService.getUserActivities(user);
-            boolean truc = false;
 
             mv.addObject("user", user);
 

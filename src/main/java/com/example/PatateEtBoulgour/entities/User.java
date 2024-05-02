@@ -69,6 +69,9 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<Activity> activities;
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<Parcours> parcours;
+
     public void setPassword(String password) {
         this.password = password;
         this.passwordHash = PasswordService.encodePassword(password);
