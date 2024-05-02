@@ -17,12 +17,6 @@ import java.util.List;
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
     public Activity findById(long id);
 
-    @Transactional
-    @Modifying
-    default void addUser(User user, Activity activity){
-        user.addActivity(activity);
-        save(activity);
-    }
 
     public List<Activity> findAllByOrderByLabelDesc();
 
@@ -47,5 +41,11 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
     @Query("SELECT a FROM Activity a JOIN a.disciplines d WHERE d.label LIKE CONCAT('%', :keyword, '%')")
     public List<Activity> findActivitiesByDisciplineLabel(@Param("keyword") String disciplineLabel, Pageable page);
+
+    @Query("select label from Activity")
+    List<String> getAllLabel();
+
+    @Query("select a.description from Activity a")
+    List<String> getAllDescription();
 
 }

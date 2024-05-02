@@ -8,6 +8,8 @@ import com.example.PatateEtBoulgour.services.ActivityService;
 import com.example.PatateEtBoulgour.services.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -61,9 +63,16 @@ public class HomeController {
         return m;
     }
 
+
     @PostMapping()
-    public String homeSearch(@RequestParam(value = "option", defaultValue = "") String opt, @RequestParam("search") String activityKeywords, @RequestParam("page") int numPage, Model m) {
-        m = search(m, opt, activityKeywords, numPage);
+    public String homeSearch(@RequestParam(value = "option", defaultValue = "") String opt, @RequestParam("search") String activityKeywords, @RequestParam("page") Optional<Integer> numPage, Model m) {
+
+        if (!numPage.isPresent()) {
+            return "redirect:/";
+        }
+
+        m = search(m, opt, activityKeywords, numPage.get());
+
         return "components/activities";
     }
 }
