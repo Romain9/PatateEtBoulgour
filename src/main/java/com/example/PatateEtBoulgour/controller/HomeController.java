@@ -35,16 +35,16 @@ public class HomeController {
 
     @GetMapping()
     public String home(Model m) {
-        m = search(m, "", 0);
+        m = search(m, "", "", 0);
 
         return "index";
     }
 
-    private Model search(Model m, String activityKeywords, int numPage) {
+    private Model search(Model m, String opt, String activityKeywords, int numPage) {
 
         Pageable page = PageRequest.of(0, 10*(numPage+1));
 
-        List<Activity> activities = activityService.getActivityContainingKeyword(activityKeywords, page);
+        List<Activity> activities = activityService.getActivityContainingKeyword(opt, activityKeywords, page);
 
         m.addAttribute("activities", activities);
 
@@ -68,8 +68,8 @@ public class HomeController {
     }
 
     @PostMapping()
-    public String homeSearch(@RequestParam("search") String activityKeywords, @RequestParam("page") int numPage, Model m) {
-        m = search(m, activityKeywords, numPage);
+    public String homeSearch(@RequestParam(value = "option", defaultValue = "") String opt, @RequestParam("search") String activityKeywords, @RequestParam("page") int numPage, Model m) {
+        m = search(m, opt, activityKeywords, numPage);
         return "components/activities";
     }
 }

@@ -35,8 +35,27 @@ public class ActivityService {
         return activitiesSet;
     }
 
-    public List<Activity> getActivityContainingKeyword(String keyword, Pageable pageable) {
-        return activityRepository.findByContainsLabelOrDescription(keyword, pageable);
+    public List<Activity> getActivityContainingKeyword(String opt, String keyword, Pageable pageable) {
+        List<Activity> act;
+
+        switch (opt) {
+            case "titre":
+                act = activityRepository.findByContainsLabelOrDescription(keyword, pageable);
+                break;
+            case "description":
+                act = activityRepository.findByContainsLabelOrDescription(keyword, pageable);
+                break;
+            case "pathologies":
+                act = activityRepository.findByContainsLabelOrDescription(keyword, pageable);
+                break;
+            case "disciplines":
+                act = activityRepository.findByContainsLabelOrDescription(keyword, pageable);
+                break;
+            default:
+                act = activityRepository.findByContainsLabelOrDescription(keyword, pageable);
+                break;
+        }
+        return act;
     }
 
     public void addUserToActivity(User user, Long activityId) {

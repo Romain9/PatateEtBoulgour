@@ -1,13 +1,14 @@
-<h2 class="sortHead">Recherche:</h2>
+<h2 class="sortHead">Recherche par:</h2>
 <form>
 
-    <input id="search" type="text" name="search" onkeyup="asyncSearch(this)">
-
-    <select name="sortOption">
+    <select id="sortOptions" name="sortOption">
         <option value="titre">Titre</option>
         <option value="description">Description</option>
         <option value="pathologies">Pathologies</option>
+        <option value="disciplines">Diciplines</option>
     </select>
+
+    <input id="search" type="text" name="search" onkeyup="asyncSearch(this)">
 
     <!--<div class="spinner"></div>-->
 </form>

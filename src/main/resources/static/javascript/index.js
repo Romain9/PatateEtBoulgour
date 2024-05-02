@@ -1,5 +1,6 @@
 
 function asyncSearch(element) {
+    var option = $('#sortOptions').find(':selected').val();
     var search = $('#search').val();
     var nb = $('#activities').data("page");
 
@@ -14,6 +15,7 @@ function asyncSearch(element) {
         type: "POST",
         url: "/",
         data: {
+            option: option,
             search: search,
             page: nb
         },
