@@ -30,3 +30,22 @@ function asyncSearch(element) {
     });
 }
 
+function loadDatalist (endpoint) {
+    $.ajax({
+        url: '/api/search/' + endpoint, // Change this to your backend endpoint
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            // Clear existing options
+            $('#searchList').empty();
+            // Append new options
+            $.each(response, function(index, value) {
+                $('#searchList').append('<option value="' + value + '">');
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error('Erreur: ' + error);
+        }
+    });
+}
+

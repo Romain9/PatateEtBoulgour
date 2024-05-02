@@ -1,14 +1,26 @@
 <h2 class="sortHead">Recherche par:</h2>
 <form method="POST">
 
-    <select id="sortOptions" name="sortOption">
+    <select id="sortOptions" name="sortOption" onchange="loadDatalist(this.value)">
         <option value="titre">Titre</option>
         <option value="description">Description</option>
         <option value="pathologies">Pathologies</option>
         <option value="disciplines">Diciplines</option>
     </select>
 
-    <input id="search" type="text" name="search" onkeyup="asyncSearch(this)">
+    <input id="search" type="text" name="search" list="searchList" onkeyup="asyncSearch(this)" autocomplete="off">
 
+    <datalist id="searchList" onchange="loadDatalist('titre')">
+    </datalist>
     <!--<div class="spinner"></div>-->
 </form>
+
+<script>
+    $(document).ready(function() {
+        $('#search').val('');
+    });
+
+    $('#search').on('focus', function() {
+        $(this).val('');
+    });
+</script>
