@@ -13,8 +13,4 @@ public class PathologyService {
     @Autowired
     PathologyRepository pathologyRepository;
 
-
-    public List<Pathology> getAllPathologies(){
-        return pathologyRepository.findAllByOrderByLabelDesc();
-    }
 }

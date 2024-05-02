@@ -51,7 +51,7 @@ public class UserController {
         model.addAttribute("errors", errorMessages);
         model.addAttribute("user", user);
 
-        List<Pathology> allPathologies = pathologyService.getAllPathologies();
+        List<Pathology> allPathologies = pathologyRepository.findAll();
         model.addAttribute("allPathologies", allPathologies);
 
         // Pas d'erreur, vérification de l'addresse via l'API du gouvernement
