@@ -14,6 +14,7 @@ import com.example.PatateEtBoulgour.services.UserService;
 import jakarta.validation.Valid;
 import org.h2.engine.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -105,7 +106,9 @@ public class UserController {
 
             Pathology pathoUser = user.getPathology();
             if (pathoUser != null) 
-                mv.addObject("activitiesCar", activityRepository.findActivitiesByPathologyLabel(pathoUser.getLabel()));
+                mv.addObject("activitiesCar",
+                        activityRepository.findActivitiesByPathologyLabel(pathoUser.getLabel())
+                );
                 
             mv.addObject("activities", activities);
         }
@@ -117,7 +120,8 @@ public class UserController {
     @GetMapping("add/{activityId}")
     public String addActivity(@PathVariable("activityId") Long activityId) {
         User user = userService.getCurrentUser();
-        userService.addActivity(user, activityRepository.findById(activityId).get());
+        Optional<Activity> activity = activityRepository.findById(activityId);
+        activity.ifPresent(x -> userService.addActivity(user, x));
         return "redirect:/";
     }
 
@@ -125,10 +129,8 @@ public class UserController {
     @GetMapping("remove/{activityId}")
     public String removeActivity(@PathVariable("activityId") Long activityId) {
         User user = userService.getCurrentUser();
-
-        Activity activity = activityRepository.findById(activityId).get();
-        userService.removeActivity(user, activity);
-
+        Optional<Activity> activity = activityRepository.findById(activityId);
+        activity.ifPresent(x -> userService.removeActivity(user, x));
         return "redirect:/user";
     }
     

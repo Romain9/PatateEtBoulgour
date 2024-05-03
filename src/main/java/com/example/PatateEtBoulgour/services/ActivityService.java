@@ -15,24 +15,10 @@ public class ActivityService {
     @Autowired
     UserService userService;
 
-    public List<Activity> getAllActivities(){
-        return activityRepository.findAllByOrderByLabelDesc();
-    }
-
-    public List<Activity> getAllActivities(Pageable pageable){
-        return activityRepository.findAllByOrderByLabelDesc(pageable);
-    }
-
     public List<Activity> getActivityContainingKeyword(String opt, String keyword, Pageable pageable) {
         List<Activity> act;
 
         switch (opt) {
-            case "titre":
-                act = activityRepository.findByContainsLabel(keyword, pageable);
-                break;
-            case "description":
-                act = activityRepository.findByContainsDescription(keyword, pageable);
-                break;
             case "pathologies":
                 act = activityRepository.findActivitiesByPathologyLabel(keyword, pageable);
                 break;
@@ -45,8 +31,5 @@ public class ActivityService {
         }
         return act;
     }
-    
-    public List<Activity> getActivityContainingKeyword(String keyword, Pageable pageable) {
-        return activityRepository.findByContainsLabelOrDescription(keyword, pageable);
-    }
+
 }

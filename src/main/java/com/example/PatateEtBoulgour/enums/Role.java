@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum Role {
-    // + en haut = les droits de celui du bas + ses propre droit.
+    // + en haut = les droits de celui du bas + ses propres droits.
     SUPER_ADMIN("SUPER_ADMIN"),
     ADMIN("ADMIN"),
     USER("USER");

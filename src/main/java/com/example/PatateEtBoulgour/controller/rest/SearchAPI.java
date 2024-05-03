@@ -34,11 +34,6 @@ public class SearchAPI {
         return activityRepository.getAllLabel();
     }
 
-    @GetMapping("/search/description")
-    public List<String> getDescriptions() {
-        return activityRepository.getAllDescription();
-    }
-
     @GetMapping("/search/disciplines")
     public List<String> getDiciplines() {
         return diciplinesRepository.getAllLabel();

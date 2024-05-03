@@ -3,12 +3,11 @@
 
     <select id="sortOptions" name="sortOption" onchange="loadDatalist(this.value, 'searchList')">
         <option value="titre">Titre</option>
-        <option value="description">Description</option>
         <option value="pathologies">Pathologies</option>
         <option value="disciplines">Diciplines</option>
     </select>
 
-    <input id="search" type="text" name="search" list="searchList" onkeydown="asyncSearch(this)" autocomplete="off">
+    <input id="search" type="text" name="search" list="searchList" onkeyup="asyncSearch(this)" autocomplete="off">
 
     <datalist id="searchList">
     </datalist>
@@ -25,9 +24,5 @@
             asyncSearch($('#search').val());
         });
 
-    });
-
-    $('#search').on('focus', function() {
-        $(this).val('');
     });
 </script>

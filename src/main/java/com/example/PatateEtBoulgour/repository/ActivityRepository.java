@@ -15,40 +15,37 @@ import java.util.List;
 
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
-    public Activity findById(long id);
+    Activity findById(long id);
 
 
-    public List<Activity> findAllByOrderByLabelDesc();
+    List<Activity> findAllByOrderByLabelDesc();
 
     @Query("SELECT a FROM Activity a WHERE a.label LIKE CONCAT('%', :keyword, '%') OR a.description LIKE CONCAT('%', :keyword, '%')")
-    public List<Activity> findByContainsLabelOrDescription(@Param("keyword") String keyword);
+    List<Activity> findByContainsLabelOrDescription(@Param("keyword") String keyword);
 
     @Query("SELECT a FROM Activity a JOIN a.pathologies p WHERE p.label LIKE CONCAT('%', :keyword, '%')")
-    public List<Activity> findActivitiesByPathologyLabel(@Param("keyword") String pathologyLabel);
+    List<Activity> findActivitiesByPathologyLabel(@Param("keyword") String pathologyLabel);
     
     /* Pour la pagination */
     
-    public List<Activity> findAllByOrderByLabelDesc(Pageable page);
+    List<Activity> findAllByOrderByLabelDesc(Pageable page);
 
     @Query("SELECT a FROM Activity a WHERE a.label LIKE CONCAT('%', :keyword, '%') OR a.description LIKE CONCAT('%', :keyword, '%')")
-    public List<Activity> findByContainsLabelOrDescription(@Param("keyword") String keyword, Pageable page);
+    List<Activity> findByContainsLabelOrDescription(@Param("keyword") String keyword, Pageable page);
 
     @Query("SELECT a FROM Activity a WHERE a.label LIKE CONCAT('%', :keyword, '%')")
-    public List<Activity> findByContainsLabel(@Param("keyword") String keyword, Pageable page);
+    List<Activity> findByContainsLabel(@Param("keyword") String keyword, Pageable page);
 
     @Query("SELECT a FROM Activity a WHERE a.description LIKE CONCAT('%', :keyword, '%')")
-    public List<Activity> findByContainsDescription(@Param("keyword") String keyword, Pageable page);
+    List<Activity> findByContainsDescription(@Param("keyword") String keyword, Pageable page);
 
     @Query("SELECT a FROM Activity a JOIN a.pathologies p WHERE p.label LIKE CONCAT('%', :keyword, '%')")
-    public List<Activity> findActivitiesByPathologyLabel(@Param("keyword") String pathologyLabel, Pageable page);
+    List<Activity> findActivitiesByPathologyLabel(@Param("keyword") String pathologyLabel, Pageable page);
 
     @Query("SELECT a FROM Activity a JOIN a.disciplines d WHERE d.label LIKE CONCAT('%', :keyword, '%')")
-    public List<Activity> findActivitiesByDisciplineLabel(@Param("keyword") String disciplineLabel, Pageable page);
+    List<Activity> findActivitiesByDisciplineLabel(@Param("keyword") String disciplineLabel, Pageable page);
 
     @Query("select label from Activity")
     List<String> getAllLabel();
-
-    @Query("select a.description from Activity a")
-    List<String> getAllDescription();
 
 }
