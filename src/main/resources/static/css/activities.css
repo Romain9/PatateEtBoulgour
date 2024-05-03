@@ -184,3 +184,21 @@ Activities
 .sort {
     margin-bottom: 2em;
 }
+
+/**
+================
+
+Parcours
+
+===============
+*/
+
+.parcoursRating {
+    margin-top: 2em;
+    width: 38em;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto auto auto auto;
+    border: solid 1px red;
+    row-gap: 1em;
+}
