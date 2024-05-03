@@ -2,32 +2,36 @@
 
 <div data-page="{{#nbPage}}{{nbPage}}{{/nbPage}}" class="activities" id="activities" >
 {{#activities}}
-    <div class="activity items" id="item">
+
+<div class="activity items" id="item">
     
-        <a class="label" href="{{url}}" id="label">{{label}}</a>
+    <a class="label" href="{{url}}" id="label">{{label}}</a>
 
-        <p class="description">{{description}}</p>
-        {{^unlogged}}
-            {{#containsCurrentUser}}
-                <a class="activityAction removeActivity" href="/remove/{{id}}">Retirer activité</a>
-            {{/containsCurrentUser}}
-            {{^containsCurrentUser}}
-                <a class="activityAction addActivity" href="/add/{{id}}">Ajouter activité</a>
-            {{/containsCurrentUser}}
-        {{/unlogged}}
+    <p class="description">{{description}}</p>
+    <div class="activityBtn">
+    {{^unlogged}}
+        {{#containsCurrentUser}}
+            {{>components/rating}}
+            <a class="activityAction removeActivity" href="/remove/{{id}}">Retirer activité</a>
+        {{/containsCurrentUser}}
+        {{^containsCurrentUser}}
+            <a class="activityAction addActivity" href="/add/{{id}}">Ajouter activité</a>
+        {{/containsCurrentUser}}
+    {{/unlogged}}
+    </div>
 
-        <div class="tag">
-            {{#pathologies}}
-                <p>{{label}}</p>
-            {{/pathologies}}
-        </div>
+    <div class="tag">
+        {{#pathologies}}
+            <p>{{label}}</p>
+        {{/pathologies}}
+    </div>
 
-        <div>
-            {{#diciplines}}
-                {{label}}
-            {{/diciplines}}
-        </div>
-</div>
+    <div>
+        {{#diciplines}}
+            {{label}}
+        {{/diciplines}}
+    </div>
+</div>  
 
 {{/activities}}
 {{^activities}}

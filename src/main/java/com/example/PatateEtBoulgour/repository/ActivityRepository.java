@@ -22,6 +22,9 @@ public interface ActivityRepository extends JpaRepository<Activity, Long> {
 
     @Query("SELECT a FROM Activity a WHERE a.label LIKE CONCAT('%', :keyword, '%') OR a.description LIKE CONCAT('%', :keyword, '%')")
     public List<Activity> findByContainsLabelOrDescription(@Param("keyword") String keyword);
+
+    @Query("SELECT a FROM Activity a JOIN a.pathologies p WHERE p.label LIKE CONCAT('%', :keyword, '%')")
+    public List<Activity> findActivitiesByPathologyLabel(@Param("keyword") String pathologyLabel);
     
     /* Pour la pagination */
     

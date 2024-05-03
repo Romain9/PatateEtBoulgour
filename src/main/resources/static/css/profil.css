@@ -1,0 +1,50 @@
+/**
+====================
+
+Page profil
+
+====================
+*/
+
+.act  {
+    margin: 2em 0 2em 30%;
+}
+
+.entetePr {
+    margin: 0 auto 0 auto;
+    width: 30%;
+    height: 15em;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.entetePr > * {
+    margin: 0;
+}
+
+.name {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+
+.age {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.gender {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.pathology {
+    grid-column: 1;
+    grid-row: 5;
+}
+
+.adresse {
+    grid-column: 1;
+    grid-row: 4;
+}

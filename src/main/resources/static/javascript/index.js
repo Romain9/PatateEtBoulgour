@@ -49,3 +49,23 @@ function loadDatalist (endpoint, datalist) {
     });
 }
 
+function toRight() {
+    var activities = document.getElementsByClassName("acti");
+
+    var translateLog = activities[0].style.transform;
+    if (activities.length > 1 && translateLog.split(' ')[0] !== "") {
+        for (let i = 0 ; i < activities.length ; i++) {
+            activities[i].style.transform = translateLog.replace("translateX(-100%)", "");
+        }
+    }
+}
+
+function toLeft() {
+    var activities = document.getElementsByClassName("acti");
+    var translateLog = activities[0].style.transform;
+    if (activities.length > 1 && translateLog.split(' ')[0] == "") {
+        for (let i = 0 ; i < activities.length ; i++) {
+            activities[i].style.transform += 'translateX(-100%)';
+        }
+    }
+}

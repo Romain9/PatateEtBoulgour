@@ -50,6 +50,7 @@ public class UserController {
         bindingResult.getGlobalErrors().forEach(globalError -> errorMessages.add(globalError.getDefaultMessage()));
         model.addAttribute("errors", errorMessages);
         model.addAttribute("user", user);
+        model.addAttribute("pathology", user.getPathology());
 
         List<Pathology> allPathologies = pathologyRepository.findAll();
         model.addAttribute("allPathologies", allPathologies);
@@ -102,6 +103,10 @@ public class UserController {
                 activity.setContainsCurrentUser(true);
             }
 
+            Pathology pathoUser = user.getPathology();
+            if (pathoUser != null) 
+                mv.addObject("activitiesCar", activityRepository.findActivitiesByPathologyLabel(pathoUser.getLabel()));
+                
             mv.addObject("activities", activities);
         }
 

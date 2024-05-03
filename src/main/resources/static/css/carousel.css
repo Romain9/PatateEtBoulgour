@@ -1,0 +1,52 @@
+.carousel {
+    width: 38em;
+    height: 25em;
+    margin: 2em auto 0 auto;
+    border: solid 1px red;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 20% 60% 20%;
+    overflow: hidden;
+}
+
+.acts {
+    display: grid;
+    grid-auto-flow: column;
+    width: auto;
+}
+
+/*
+.acti {
+    width: 100em;
+    background-color: grey;
+    border: solid 1px black;
+    transition: 1s;
+
+}
+*/
+
+.acti {
+    width: 37.9em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 35%;
+    grid-template-rows: 9% 57% 34%;
+}
+
+.it {
+    margin: 0;
+    border: solid 1px grey;
+    border-radius: 2px;
+    transition: .5s ease-out;
+    cursor: pointer;
+}
+
+.it:hover {
+    background-color: #e7e7e7;
+}
+
+.carouselBtn {
+    display: flex;
+    margin: 5px 0 5px 0;
+    align-content: center;
+    justify-content: center;
+}

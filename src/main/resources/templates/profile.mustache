@@ -4,10 +4,17 @@
 {{#user}}
     <div class="entetePr">
         <h1 class="name">Profil de {{firstName}}, {{lastName}}</h1>
-        <p class="age">{{age}}</p>
-        <p class="gender">{{gender}}</p>
+        <p class="age">{{age}} ans</p>
+        <p class="gender">{{gender}}.</p>
+        <p class="pathology">Pathologie: 
+        {{#pathology}}
+            {{label}}.
+        {{/pathology}}
+        {{^pathology}}
+            Aucune.
+        {{/pathology}}
+        </p>
         <p class="adresse">{{address}}</p>
-        <p class="pathologies">{{pathology.label}}</p>
     </div>
 {{/user}}
 
@@ -15,24 +22,7 @@
     {{#allPathologies}}
         <p>{{label}}</p>
     {{/allPathologies}}
-   
 </div>
-
-<form method="dialog">
-
-    <label for="note">Quel note pour cette activité ?</label>
-
-    <select id="notes" class="notes">
-        <option value="0">0</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-    </select>
-</form>
-
-
 
 <h2 class="act">Vos activités</h2>
 
@@ -40,7 +30,7 @@
 
 
 
-
+{{>components/recommend}}
 
 
 
