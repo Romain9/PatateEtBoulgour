@@ -73,7 +73,7 @@ function findRatingFor(id) {
     });
 }
 
-function handleActivityStatusChange(id, element) {
+function handleActivityStatusChange(id, element, reloadMode = false) {
 
 
     let url = '/api/activity/'
@@ -90,11 +90,16 @@ function handleActivityStatusChange(id, element) {
         type: 'GET',
         dataType: 'json',
         success: function(response) {
-            console.log("dd")
-            if (elementClass === 'removeActivity') {
-                $(element).removeClass('removeActivity').addClass('addActivity').text('Ajouter activité')
+            if (reloadMode) {
+                location.reload()
             } else {
-                $(element).removeClass('addActivity').addClass('removeActivity').text('Supprimer activité')
+                if (elementClass === 'removeActivity') {
+                    $(element).removeClass('removeActivity').addClass('addActivity').text('Ajouter activité')
+                    $('activityId-' + id).hide()
+                } else {
+                    $(element).removeClass('addActivity').addClass('removeActivity').text('Supprimer activité')
+                    $('activityId-' + id).show()
+                }
             }
         },
         error: function(xhr, status, error) {
