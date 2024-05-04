@@ -16,10 +16,10 @@
             <div class="activityBtn">
                 {{^unlogged}}
                 {{#containsCurrentUser}}
-                    <button class="activityAction removeActivity" onclick="handleActivityStatusChange({{id}}, this)">Retirer activité</button>
+                    <button class="activityAction removeActivity" onclick="handleActivityStatusChange({{id}}, this, true)">Retirer activité</button>
                 {{/containsCurrentUser}}
                 {{^containsCurrentUser}}
-                    <button class="activityAction addActivity" onclick="handleActivityStatusChange({{id}}, this)">Ajouter activité</button>
+                    <button class="activityAction addActivity" onclick="handleActivityStatusChange({{id}}, this, true)">Ajouter activité</button>
                 {{/containsCurrentUser}}
             {{/unlogged}}
             </div>

@@ -2,19 +2,20 @@
 var nb = 0;
 
 function asyncSearch(element) {
+    var nb = $('#activities').data("page");
+
+    if (element.tagName !== "INPUT") {
+        nb++;
+    }
+    
+   loadActivities()
+}
+
+function loadActivities() {
     var option = $('#sortOptions').find(':selected').val();
     var search = $('#search').val();
     var nb = $('#activities').data("page");
 
-    if (element != null) {
-        if (element.tagName == "INPUT") {
-            nb = 0;
-        }
-        else {
-            nb++;
-        }
-    }
-    
     $.ajax({
         type: "POST",
         url: "/",
@@ -73,8 +74,7 @@ function findRatingFor(id) {
     });
 }
 
-function handleActivityStatusChange(id, element) {
-
+function handleActivityStatusChange(id, element, reloadMode = false) {
 
     let url = '/api/activity/'
     let elementClass = $(element).hasClass('removeActivity') ? 'removeActivity' : 'addActivity';
@@ -90,11 +90,15 @@ function handleActivityStatusChange(id, element) {
         type: 'GET',
         dataType: 'json',
         success: function(response) {
-            console.log("dd")
             if (elementClass === 'removeActivity') {
                 $(element).removeClass('removeActivity').addClass('addActivity').text('Ajouter activité')
             } else {
                 $(element).removeClass('addActivity').addClass('removeActivity').text('Supprimer activité')
+            }
+
+            if (reloadMode === true) {
+                console.log("reload")
+                loadActivities()
             }
         },
         error: function(xhr, status, error) {
@@ -102,6 +106,7 @@ function handleActivityStatusChange(id, element) {
             console.log('Error:', xhr.responseText, xhr.status);
         }
     });
+
 
 }
 
