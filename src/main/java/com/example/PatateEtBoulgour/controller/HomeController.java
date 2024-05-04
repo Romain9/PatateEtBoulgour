@@ -30,18 +30,10 @@ public class HomeController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    RecommandationService recommandationService;
 
     @GetMapping()
     public String home(Model m) {
         searchService.search(m, "", "", 0);
-
-        if (userService.isLoggedIn()) {
-            m.addAttribute("activitiesCarroussel",
-                    recommandationService.recommandFor(userService.getCurrentUser())
-            );
-        }
 
         return "index";
     }

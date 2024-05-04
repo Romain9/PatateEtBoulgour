@@ -2,20 +2,19 @@
 var nb = 0;
 
 function asyncSearch(element) {
-    var nb = $('#activities').data("page");
-
-    if (element.tagName !== "INPUT") {
-        nb++;
-    }
-    
-   loadActivities()
-}
-
-function loadActivities() {
     var option = $('#sortOptions').find(':selected').val();
     var search = $('#search').val();
     var nb = $('#activities').data("page");
 
+    if (element != null) {
+        if (element.tagName == "INPUT") {
+            nb = 0;
+        }
+        else {
+            nb++;
+        }
+    }
+    
     $.ajax({
         type: "POST",
         url: "/",
@@ -76,6 +75,7 @@ function findRatingFor(id) {
 
 function handleActivityStatusChange(id, element, reloadMode = false) {
 
+
     let url = '/api/activity/'
     let elementClass = $(element).hasClass('removeActivity') ? 'removeActivity' : 'addActivity';
 
@@ -90,15 +90,16 @@ function handleActivityStatusChange(id, element, reloadMode = false) {
         type: 'GET',
         dataType: 'json',
         success: function(response) {
-            if (elementClass === 'removeActivity') {
-                $(element).removeClass('removeActivity').addClass('addActivity').text('Ajouter activité')
+            if (reloadMode) {
+                location.reload()
             } else {
-                $(element).removeClass('addActivity').addClass('removeActivity').text('Supprimer activité')
-            }
-
-            if (reloadMode === true) {
-                console.log("reload")
-                loadActivities()
+                if (elementClass === 'removeActivity') {
+                    $(element).removeClass('removeActivity').addClass('addActivity').text('Ajouter activité')
+                    $('#activityId-' + id).hide()
+                } else {
+                    $(element).removeClass('addActivity').addClass('removeActivity').text('Retirer  activité')
+                    $('#activityId-' + id).show()
+                }
             }
         },
         error: function(xhr, status, error) {
@@ -106,7 +107,6 @@ function handleActivityStatusChange(id, element, reloadMode = false) {
             console.log('Error:', xhr.responseText, xhr.status);
         }
     });
-
 
 }
 

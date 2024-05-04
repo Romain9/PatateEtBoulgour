@@ -25,15 +25,6 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    private ActivityRepository activityRepository;
-
-    @Autowired
-    private AddressService addressService;
-
-    @Autowired
-    private DistanceService distanceService;
-
-    @Autowired
     private RecommandationService recommandationService;
 
     @RequireLogged
@@ -47,6 +38,13 @@ public class UserController {
 
         for (Activity activity : activities) {
             activity.setContainsCurrentUser(true);
+        }
+
+
+        if (userService.isLoggedIn()) {
+            mv.addObject("activitiesCarroussel",
+                    recommandationService.recommandFor(userService.getCurrentUser())
+            );
         }
 
         mv.addObject("inProfile", true);
