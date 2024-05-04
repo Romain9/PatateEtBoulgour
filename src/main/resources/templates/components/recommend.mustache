@@ -5,7 +5,7 @@
     
     
     <div class="acts" id="acts">
-        {{#activitiesCar}}
+        {{#activitiesCarroussel}}
 
         
         <div class="acti it" id="item">
@@ -14,12 +14,12 @@
 
             <p class="description">{{description}}</p>
             <div class="activityBtn">
-            {{^unlogged}}
+                {{^unlogged}}
                 {{#containsCurrentUser}}
-                    <a class="activityAction removeActivity" href="/remove/{{id}}">Retirer activité</a>
+                    <button class="activityAction removeActivity" onclick="handleActivityStatusChange({{id}}, this)">Retirer activité</button>
                 {{/containsCurrentUser}}
                 {{^containsCurrentUser}}
-                    <a class="activityAction addActivity" href="/add/{{id}}">Ajouter activité</a>
+                    <button class="activityAction addActivity" onclick="handleActivityStatusChange({{id}}, this)">Ajouter activité</button>
                 {{/containsCurrentUser}}
             {{/unlogged}}
             </div>
@@ -37,10 +37,10 @@
             </div>
         </div>  
 
-        {{/activitiesCar}}
-        {{^activitiesCar}}
+        {{/activitiesCarroussel}}
+        {{^activitiesCarroussel}}
             <h3>Aucune activités recommandées</h3>
-        {{/activitiesCar}}
+        {{/activitiesCarroussel}}
     </div>
 
     <div class="carouselBtn">

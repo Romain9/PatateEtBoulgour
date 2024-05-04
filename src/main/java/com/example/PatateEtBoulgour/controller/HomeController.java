@@ -5,6 +5,7 @@ import java.util.*;
 import com.example.PatateEtBoulgour.entities.Activity;
 import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.services.ActivityService;
+import com.example.PatateEtBoulgour.services.RecommandationService;
 import com.example.PatateEtBoulgour.services.SearchService;
 import com.example.PatateEtBoulgour.services.UserService;
 
@@ -26,9 +27,21 @@ public class HomeController {
     @Autowired
     private SearchService searchService;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    RecommandationService recommandationService;
+
     @GetMapping()
     public String home(Model m) {
         searchService.search(m, "", "", 0);
+
+        if (userService.isLoggedIn()) {
+            m.addAttribute("activitiesCarroussel",
+                    recommandationService.recommandFor(userService.getCurrentUser())
+            );
+        }
 
         return "index";
     }

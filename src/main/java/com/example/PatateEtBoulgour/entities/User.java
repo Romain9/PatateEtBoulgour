@@ -68,7 +68,7 @@ public class User {
     private Pathology pathology;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private Set<Activity> activities;
+    private List<Activity> activities;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Parcours> parcours;

@@ -1,5 +1,9 @@
 {{>components/header}}
 
+{{^unlogged}}
+    {{>components/recommend}}
+{{/unlogged}}
+
 {{>components/sort}}
 
 {{>components/activities}}

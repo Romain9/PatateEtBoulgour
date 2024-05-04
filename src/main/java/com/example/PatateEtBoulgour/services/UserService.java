@@ -75,7 +75,7 @@ public class UserService {
         return userRepository.findById(userId).orElse(null);
     }
 
-    public Set<Activity> getUserActivities(User user){
+    public List<Activity> getUserActivities(User user){
         return user.getActivities();
     }
 

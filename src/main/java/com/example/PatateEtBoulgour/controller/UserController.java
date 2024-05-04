@@ -1,11 +1,15 @@
 package com.example.PatateEtBoulgour.controller;
 
 import com.example.PatateEtBoulgour.annotations.RequireLogged;
+import com.example.PatateEtBoulgour.dto.Coordonnees;
 import com.example.PatateEtBoulgour.entities.Activity;
-import com.example.PatateEtBoulgour.entities.Pathology;
 import com.example.PatateEtBoulgour.entities.User;
+import com.example.PatateEtBoulgour.exception.InvalidAddressException;
+import com.example.PatateEtBoulgour.exception.InvalidApiResponse;
 import com.example.PatateEtBoulgour.repository.ActivityRepository;
-import com.example.PatateEtBoulgour.repository.PathologyRepository;
+import com.example.PatateEtBoulgour.services.AddressService;
+import com.example.PatateEtBoulgour.services.DistanceService;
+import com.example.PatateEtBoulgour.services.RecommandationService;
 import com.example.PatateEtBoulgour.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,37 +28,31 @@ public class UserController {
     private ActivityRepository activityRepository;
 
     @Autowired
-    private PathologyRepository pathologyRepository;
+    private AddressService addressService;
 
+    @Autowired
+    private DistanceService distanceService;
+
+    @Autowired
+    private RecommandationService recommandationService;
 
     @RequireLogged
     @RequestMapping("/user")
     public ModelAndView account() {
         ModelAndView mv = new ModelAndView("profile");
-
         User user = userService.getCurrentUser();
-        if (user != null){
+        List<Activity> activities = user.getActivities();
 
-            Set<Activity> activities = userService.getUserActivities(user);
+        mv.addObject("user", user);
 
-            mv.addObject("user", user);
-
-            for (Activity activity : activities) {
-                activity.setContainsCurrentUser(true);
-            }
-
-            Pathology pathoUser = user.getPathology();
-            if (pathoUser != null) 
-                mv.addObject("activitiesCar",
-                        activityRepository.findActivitiesByPathologyLabel(pathoUser.getLabel())
-                );
-
-            mv.addObject("inProfile", true);
-
-            mv.addObject("activities", activities);
+        for (Activity activity : activities) {
+            activity.setContainsCurrentUser(true);
         }
+
+        mv.addObject("inProfile", true);
+
+        mv.addObject("activities", activities);
 
         return mv;
     }
-
 }
