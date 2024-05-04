@@ -1,5 +1,6 @@
 package com.example.PatateEtBoulgour.config.profiles;
 
+import com.example.PatateEtBoulgour.entities.Pathology;
 import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.enums.Role;
 import com.example.PatateEtBoulgour.repository.UserRepository;
@@ -28,6 +29,9 @@ public class DevConfig {
                     .password("tamere")
                     .username("Compliste800")
                     .role(Role.SUPER_ADMIN)
+                    .pathology(
+                            new Pathology(1L, "Maladies cardiovasculaires")
+                    )
                     .build();
             userRepository.save(admin);
         };

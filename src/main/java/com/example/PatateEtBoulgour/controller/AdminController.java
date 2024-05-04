@@ -21,10 +21,4 @@ public class AdminController {
         return userService.getUserListModelAndView();
     }
 
-    @RequireLogged
-    @RequireRole("Admin")
-    @GetMapping("/admin/add-new-user")
-    public ModelAndView addNewUser() {
-        return userService.getNewUserFormModelAndView();
-    }
 }

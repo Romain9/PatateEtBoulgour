@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.checkerframework.common.aliasing.qual.Unique;
 import org.hibernate.annotations.CurrentTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,6 +18,9 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(uniqueConstraints={
+        @UniqueConstraint(columnNames = {"user_id", "activity_id"})
+})
 public class ActivityRating {
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -31,5 +35,5 @@ public class ActivityRating {
 
     @Min(value = 0, message = "La note doit être au moins de 0")
     @Max(value = 5, message = "La note doit être au maximum de 5")
-    private double rating;
+    private int rating;
 }

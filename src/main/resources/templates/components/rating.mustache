@@ -1,17 +1,16 @@
-<div class="notes">
-    <input type="radio" name="star" class="rating" onchange="redirect('/note/{{id}}')" id="rating5" value="5">
-    <label for="rating5"></label>
+<div class="notes" id="activityId-{{id}}">
+    <input type="radio" name="star-{{id}}" class="rating" onchange="applyRating({{id}}, this.value)" id="rating5-{{id}}" value="5">
+    <label for="rating5-{{id}}"></label>
 
-    <input type="radio" name="star" class="rating" onchange="redirect('/note/{{id}}')" id="rating4" value="4">
-    <label for="rating4"></label>
+    <input type="radio" name="star-{{id}}" class="rating}" onchange="applyRating({{id}}, this.value)"  id="rating4-{{id}}" value="4">
+    <label for="rating4-{{id}}"></label>
 
-    <input type="radio" name="star" class="rating" onchange="redirect('/note/{{id}}')" id="rating3" value="3">
-    <label for="rating3"></label>
+    <input type="radio" name="star-{{id}}" class="rating" onchange="applyRating({{id}}, this.value)"  id="rating3-{{id}}" value="3">
+    <label for="rating3-{{id}}"></label>
 
-    <input type="radio" name="star" class="rating" onchange="redirect('/note/{{id}}')" id="rating2" value="2">
-    <label for="rating2"></label>
+    <input type="radio" name="star-{{id}}" class="rating" onchange="applyRating({{id}}, this.value)"  id="rating2-{{id}}" value="2">
+    <label for="rating2-{{id}}"></label>
 
-    <input type="radio" name="star" class="rating" onchange="redirect('/note/{{id}}')" id="rating1" value="1">
-    <label for="rating1"></label>
-
+    <input type="radio" name="star-{{id}}" class="rating" onchange="applyRating({{id}}, this.value)"  id="rating1-{{id}}" value="1">
+    <label for="rating1-{{id}}"></label>
 </div>

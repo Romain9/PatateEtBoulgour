@@ -16,7 +16,6 @@
             <div class="activityBtn">
             {{^unlogged}}
                 {{#containsCurrentUser}}
-                    {{>components/rating}}
                     <a class="activityAction removeActivity" href="/remove/{{id}}">Retirer activité</a>
                 {{/containsCurrentUser}}
                 {{^containsCurrentUser}}

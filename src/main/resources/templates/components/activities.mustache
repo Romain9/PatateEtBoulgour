@@ -11,11 +11,13 @@
     <div class="activityBtn">
     {{^unlogged}}
         {{#containsCurrentUser}}
-            {{>components/rating}}
-            <a class="activityAction removeActivity" href="/remove/{{id}}">Retirer activité</a>
+            {{#inProfile}}
+                {{>components/rating}}
+            {{/inProfile}}
+            <button class="activityAction removeActivity" onclick="handleActivityStatusChange({{id}}, this)">Retirer activité</button>
         {{/containsCurrentUser}}
         {{^containsCurrentUser}}
-            <a class="activityAction addActivity" href="/add/{{id}}">Ajouter activité</a>
+            <button class="activityAction addActivity" onclick="handleActivityStatusChange({{id}}, this)">Ajouter activité</button>
         {{/containsCurrentUser}}
     {{/unlogged}}
     </div>
@@ -38,3 +40,12 @@
     <h3>Aucune activité</h3>
 {{/activities}}
 </div>
+
+{{#inProfile}}
+<script>
+    $('.notes').each(function(){
+        let id = $(this).attr('id').split('-')[1];
+        findRatingFor(id);
+    });
+</script>
+{{/inProfile}}

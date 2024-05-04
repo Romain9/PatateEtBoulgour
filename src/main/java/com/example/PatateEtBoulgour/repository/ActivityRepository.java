@@ -15,29 +15,14 @@ import java.util.List;
 
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
-    Activity findById(long id);
-
-
-    List<Activity> findAllByOrderByLabelDesc();
-
-    @Query("SELECT a FROM Activity a WHERE a.label LIKE CONCAT('%', :keyword, '%') OR a.description LIKE CONCAT('%', :keyword, '%')")
-    List<Activity> findByContainsLabelOrDescription(@Param("keyword") String keyword);
 
     @Query("SELECT a FROM Activity a JOIN a.pathologies p WHERE p.label LIKE CONCAT('%', :keyword, '%')")
     List<Activity> findActivitiesByPathologyLabel(@Param("keyword") String pathologyLabel);
     
     /* Pour la pagination */
-    
-    List<Activity> findAllByOrderByLabelDesc(Pageable page);
 
     @Query("SELECT a FROM Activity a WHERE a.label LIKE CONCAT('%', :keyword, '%') OR a.description LIKE CONCAT('%', :keyword, '%')")
     List<Activity> findByContainsLabelOrDescription(@Param("keyword") String keyword, Pageable page);
-
-    @Query("SELECT a FROM Activity a WHERE a.label LIKE CONCAT('%', :keyword, '%')")
-    List<Activity> findByContainsLabel(@Param("keyword") String keyword, Pageable page);
-
-    @Query("SELECT a FROM Activity a WHERE a.description LIKE CONCAT('%', :keyword, '%')")
-    List<Activity> findByContainsDescription(@Param("keyword") String keyword, Pageable page);
 
     @Query("SELECT a FROM Activity a JOIN a.pathologies p WHERE p.label LIKE CONCAT('%', :keyword, '%')")
     List<Activity> findActivitiesByPathologyLabel(@Param("keyword") String pathologyLabel, Pageable page);

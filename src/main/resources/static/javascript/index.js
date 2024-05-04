@@ -1,14 +1,18 @@
 
+var nb = 0;
+
 function asyncSearch(element) {
     var option = $('#sortOptions').find(':selected').val();
     var search = $('#search').val();
     var nb = $('#activities').data("page");
 
-    if (element.tagName == "INPUT") {
-        nb = 0;
-    }
-    else {
-        nb++;
+    if (element != null) {
+        if (element.tagName == "INPUT") {
+            nb = 0;
+        }
+        else {
+            nb++;
+        }
     }
     
     $.ajax({
@@ -30,6 +34,7 @@ function asyncSearch(element) {
     });
 }
 
+
 function loadDatalist (endpoint, datalist) {
     $.ajax({
         url: '/api/search/' + endpoint,
@@ -47,6 +52,57 @@ function loadDatalist (endpoint, datalist) {
             console.error('Erreur: ' + error);
         }
     });
+}
+
+function applyRating (id, value) {
+    $.ajax({
+        url: '/api/activity/rating/' + id + "/" +value,
+        type: 'GET',
+        dataType: 'json'
+    });
+}
+
+function findRatingFor(id) {
+    $.ajax({
+        url: '/api/activity/rating/' + id,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            $('#rating' + response + '-' + id).prop("checked", true);
+        }
+    });
+}
+
+function handleActivityStatusChange(id, element) {
+
+
+    let url = '/api/activity/'
+    let elementClass = $(element).hasClass('removeActivity') ? 'removeActivity' : 'addActivity';
+
+    if (elementClass === 'removeActivity') {
+        url += 'remove/' + id;
+    } else {
+        url += 'add/' + id;
+    }
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            console.log("dd")
+            if (elementClass === 'removeActivity') {
+                $(element).removeClass('removeActivity').addClass('addActivity').text('Ajouter activité')
+            } else {
+                $(element).removeClass('addActivity').addClass('removeActivity').text('Supprimer activité')
+            }
+        },
+        error: function(xhr, status, error) {
+            // This function will be called if there is an error
+            console.log('Error:', xhr.responseText, xhr.status);
+        }
+    });
+
 }
 
 function toRight() {
