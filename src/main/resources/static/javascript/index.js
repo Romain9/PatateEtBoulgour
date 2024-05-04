@@ -95,10 +95,10 @@ function handleActivityStatusChange(id, element, reloadMode = false) {
             } else {
                 if (elementClass === 'removeActivity') {
                     $(element).removeClass('removeActivity').addClass('addActivity').text('Ajouter activité')
-                    $('activityId-' + id).hide()
+                    $('#activityId-' + id).hide()
                 } else {
-                    $(element).removeClass('addActivity').addClass('removeActivity').text('Supprimer activité')
-                    $('activityId-' + id).show()
+                    $(element).removeClass('addActivity').addClass('removeActivity').text('Retirer  activité')
+                    $('#activityId-' + id).show()
                 }
             }
         },
