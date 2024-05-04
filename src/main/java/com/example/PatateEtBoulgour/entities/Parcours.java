@@ -26,7 +26,7 @@ public class Parcours {
     @Max(value = 10, message = "La note doit être au maximum de 10")
     private int rating;
 
-    @Length(min = 20, message = "Veuillez laisser un commentaire")
+    @Length(min = 5, message = "Veuillez laisser un commentaire")
     private String commentaire;
 
     @ManyToOne
