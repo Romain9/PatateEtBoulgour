@@ -24,7 +24,7 @@
             <td>{{age}}</td>
             <td>{{email}}</td>
             <td>{{address}}</td>
-            <td>{{pathology.label}}</td>
+            <td>{{#pathology}}{{pathology.label}}{{/pathology}}{{#pathology}}X{{/pathology}}</td>
             <td><a href="/admin/consulter-user/{{id}}">Consulter</a></td>
         </tr>
     {{/users}}
