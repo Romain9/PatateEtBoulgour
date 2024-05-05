@@ -40,7 +40,7 @@ public class AdminController {
 
     @RequireLogged
     @RequireRole("Admin")
-    @GetMapping("/utilisateurs-list")
+    @GetMapping("/utilisateurs-liste")
     public ModelAndView userList(ModelAndView modelAndView) {
         List<User> users = userRepository.findAll();
         modelAndView.addObject("users", users);
@@ -65,7 +65,7 @@ public class AdminController {
 
     @RequireLogged
     @RequireRole("Admin")
-    @GetMapping("/consulter-parcours/")
+    @GetMapping("/consulter-parcours")
     public String parcoursList(Model model) {
         List<Parcours> parcours = parcoursRepository.findAll();
 
@@ -75,7 +75,7 @@ public class AdminController {
 
     @RequireLogged
     @RequireRole("Admin")
-    @GetMapping("/consulter-activités/")
+    @GetMapping("/consulter-activités")
     public String activityList(Model model) {
         HashMap<Activity, ArrayList<ActivityRating>> mappedActivites = new HashMap<>();
 
