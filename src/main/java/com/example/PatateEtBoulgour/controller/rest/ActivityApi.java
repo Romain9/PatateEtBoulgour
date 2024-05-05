@@ -7,16 +7,9 @@ import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.repository.ActivityRatingRepository;
 import com.example.PatateEtBoulgour.repository.ActivityRepository;
 import com.example.PatateEtBoulgour.services.UserService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.apache.catalina.mapper.Mapper;
-import org.h2.util.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
