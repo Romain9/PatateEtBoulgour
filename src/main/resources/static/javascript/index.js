@@ -124,7 +124,8 @@ function toRight() {
 function toLeft() {
     var activities = document.getElementsByClassName("acti");
     var translateLog = activities[0].style.transform;
-    if (activities.length > 1 && translateLog.split(' ')[0] == "") {
+    console.log(activities.length +" | "+translateLog.split(' ').length);
+    if (activities.length > 1 && translateLog.split(' ').length < (activities.length-1)) {
         for (let i = 0 ; i < activities.length ; i++) {
             activities[i].style.transform += 'translateX(-100%)';
         }
