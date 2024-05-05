@@ -13,6 +13,7 @@
         <th>Email</th>
         <th>Address</th>
         <th>Pathologie</th>
+        <th>Role</th>
         <th>Consulter</th>
     </tr>
     </thead>
@@ -24,7 +25,8 @@
             <td>{{age}}</td>
             <td>{{email}}</td>
             <td>{{address}}</td>
-            <td>{{#pathology}}{{pathology.label}}{{/pathology}}{{#pathology}}X{{/pathology}}</td>
+            <td>{{#pathology}}{{pathology.label}}{{/pathology}}{{^pathology}}X{{/pathology}}</td>
+            <td>{{role}}</td>
             <td><a href="/admin/consulter-user/{{id}}">Consulter</a></td>
         </tr>
     {{/users}}

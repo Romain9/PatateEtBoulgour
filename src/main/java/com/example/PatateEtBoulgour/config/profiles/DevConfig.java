@@ -21,36 +21,49 @@ public class DevConfig {
     public SmartInitializingSingleton initDefaultData() {
         return () -> {
             User admin = User.builder()
-                    .age(20)
+                    .age(21)
                     .gender("Male")
-                    .address("25 Je ne contracte pas, 00000 Nul Part")
-                    .firstName("Jean")
-                    .lastName("Sebastonks")
-                    .password("tamere")
-                    .username("Compliste800")
-                    .email("lol@lol.com")
+                    .address("60 Rue du Plat d'Étain, 37000 Tours")
+                    .firstName("Admin")
+                    .lastName("Principal")
+                    .password("admin501")
+                    .username("Admin")
+                    .email("admin@root.fr")
                     .role(Role.SUPER_ADMIN)
-                    .pathology(
-                            new Pathology(1L, "Maladies cardiovasculaires")
-                    )
                     .build();
 
             User utilisateur = User.builder()
-                    .age(20)
-                    .gender("Triple PHP")
-                    .address("25 Je ne contracte pas, 00000 Nul Part")
-                    .firstName("Jeanne")
-                    .lastName("Sebastonkette")
-                    .password("tamere")
-                    .username("patate")
-                    .email("lol2@lol.com")
+                    .age(69)
+                    .gender("Male")
+                    .address("2 Bd Tonnellé, 37000 Tours")
+                    .firstName("Michel")
+                    .lastName("Platin")
+                    .password("mot de passe")
+                    .username("michel2")
+                    .email("michelle2@gmail.com")
                     .role(Role.USER)
                     .pathology(
-                            new Pathology(2L, "Maladies cardiovasculaires")
+                            new Pathology(5L, "")
+                    )
+                    .build();
+
+            User utilisateur2 = User.builder()
+                    .age(89)
+                    .gender("Female")
+                    .address("2 Bd Tonnellé, 37000 Tours")
+                    .firstName("Jaqueline")
+                    .lastName("Roseau")
+                    .password("123456789")
+                    .username("jaqueline.roseau")
+                    .email("jaqueline5@ymail.com")
+                    .role(Role.USER)
+                    .pathology(
+                            new Pathology(2L, "")
                     )
                     .build();
             userRepository.save(admin);
             userRepository.save(utilisateur);
+            userRepository.save(utilisateur2);
         };
     }
 }

@@ -27,10 +27,8 @@ import java.util.Optional;
 @RequestMapping("/admin")
 public class AdminController {
 
-
     @Autowired
     private UserRepository userRepository;
-
 
     @Autowired
     private ParcoursRepository parcoursRepository;
