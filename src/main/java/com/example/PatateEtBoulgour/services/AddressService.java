@@ -44,7 +44,7 @@ public class AddressService {
             double score = properties.get("score").asDouble();
 
             // Si l'addresse est mal écrite ; son score sera bas.
-            if (score > 0.75) {
+            if (score > 0.4) {
                 double longitude = coordinates.get(0).asDouble();
                 double latitude = coordinates.get(1).asDouble();
 

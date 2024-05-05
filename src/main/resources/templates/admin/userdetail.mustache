@@ -1,0 +1,53 @@
+{{>components/header}}
+{{#user}}
+<h1>Info sur {{firstName}} {{lastName}}</h1>
+
+<a href="/admin/utilisateurs-list/"><button>Consulter la liste des utilisateurs</button></a>
+<a href="/admin/consulter-activités/"><button>Consulter la note moyenne des activités</button></a>
+<a href="/admin/consulter-parcours/"><button>Consulter la liste des parcours réalisés par les utilisateur</button></a>
+
+<ul>
+    <li>Nom: {{lastName}}</li>
+    <li>Prénom: {{firstName}}</li>
+    <li>Age: {{age}}</li>
+    <li>Email: {{email}}</li>
+    <li>Adresse: {{address}}</li>
+    <li>Pathology: {{pathology.label}}</li>
+    <li>
+        Activités : {{^activities}}Aucune activité.{{/activities}}
+        <ul>
+            {{#activities}}
+                <li>{{label}}</li>
+            {{/activities}}
+        </ul>
+    </li>
+</ul>
+
+<h2>Parcours notés :</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Note</th>
+        <th>Date</th>
+        <th>Commentaire</th>
+        <th>Activités</th>
+    </tr>
+    </thead>
+    <tbody>
+        {{#parcours}}
+        <tr>
+            <td>{{rating}}</td>
+            <td>{{datetime}}</td>
+            <td>{{commentaire}}</td>
+            <td><ul>
+                {{#activities}}
+                    <li>{{label}}</li>
+                {{/activities}}
+            </ul></td>
+        </tr>
+    {{/parcours}}
+    </tbody>
+</table>
+{{/user}}
+
+{{>components/footer}}

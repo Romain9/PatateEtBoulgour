@@ -1,5 +1,7 @@
 {{>components/header}}
 
+<a href="/admin/consulter-activités/"><button>Consulter la note moyenne des activités</button></a>
+<a href="/admin/consulter-parcours/"><button>Consulter la liste des parcours réalisés par les utilisateur</button></a>
 
 <h1>Liste des Utilisateurs</h1>
 <table>
@@ -8,7 +10,10 @@
         <th>Nom</th>
         <th>Prénom</th>
         <th>Âge</th>
-        <!-- Ajoutez d'autres colonnes si nécessaire -->
+        <th>Email</th>
+        <th>Address</th>
+        <th>Pathologie</th>
+        <th>Consulter</th>
     </tr>
     </thead>
     <tbody>
@@ -17,14 +22,13 @@
             <td>{{lastName}}</td>
             <td>{{firstName}}</td>
             <td>{{age}}</td>
-            <!-- Utilisez les propriétés de l'objet User ici -->
+            <td>{{email}}</td>
+            <td>{{address}}</td>
+            <td>{{pathology.label}}</td>
+            <td><a href="/admin/consulter-user/{{id}}">Consulter</a></td>
         </tr>
     {{/users}}
     </tbody>
 </table>
-
-<a href="/admin/add-new-user"><button>Ajouter un utilisateur</button></a>
-
-
 
 {{>components/footer}}

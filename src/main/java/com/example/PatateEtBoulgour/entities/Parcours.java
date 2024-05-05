@@ -11,6 +11,7 @@ import org.checkerframework.common.aliasing.qual.Unique;
 import org.hibernate.annotations.CurrentTimestamp;
 import org.hibernate.validator.constraints.Length;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -33,7 +34,8 @@ public class Parcours {
     private User user;
 
     @CurrentTimestamp
-    private String datetime;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date datetime;
 
     @ManyToMany(cascade = CascadeType.ALL)
     List<Activity> activities;

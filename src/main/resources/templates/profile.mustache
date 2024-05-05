@@ -1,45 +1,45 @@
 {{>components/header}}
 
-{{#success}}
-    <p class="success"><strong>Youpi:</strong> {{this}}</p>
-{{/success}}
-
-{{#errors}}
-    <p class="error"><strong>Erreur:</strong> {{this}}</p>
-{{/errors}}
-
-{{>components/recommend}}
-
 {{#user}}
     <div class="entetePr">
         <h1 class="name">Profil de {{firstName}}, {{lastName}}</h1>
         <p class="age">{{age}} ans</p>
         <p class="gender">{{gender}}.</p>
-        <p class="pathology">Pathologie: 
-        {{#pathology}}
-            {{label}}.
-        {{/pathology}}
-        {{^pathology}}
-            Aucune.
-        {{/pathology}}
-        </p>
+        {{#pathology}}<p class="pathology">Pathologie: {{label}}.</p>{{/pathology}}
         <p class="adresse">{{address}}</p>
+
+        {{#isAdmin}}
+            <a href="/admin/utilisateurs-list/"><button>Consulter la liste des utilisateurs</button></a>
+            <a href="/admin/consulter-activités/"><button>Consulter la note moyenne des activités</button></a>
+            <a href="/admin/consulter-parcours/"><button>Consulter la liste des parcours réalisés par les utilisateur</button></a>
+        {{/isAdmin}}
     </div>
 {{/user}}
 
-<div>
-    {{#allPathologies}}
-        <p>{{label}}</p>
-    {{/allPathologies}}
-</div>
+{{^isAdmin}}
+    {{#success}}
+        <p class="success"><strong>Youpi:</strong> {{this}}</p>
+    {{/success}}
 
-<h2 class="act">Vos activités</h2>
+    {{#errors}}
+        <p class="error"><strong>Erreur:</strong> {{this}}</p>
+    {{/errors}}
 
-{{>components/activities}}
+    {{>components/recommend}}
+
+    <div>
+        {{#allPathologies}}
+            <p>{{label}}</p>
+        {{/allPathologies}}
+    </div>
+
+    <h2 class="act">Vos activités</h2>
+
+    {{>components/activities}}
 
 
-{{>components/rateParcours}}
-
+    {{>components/rateParcours}}
+{{/isAdmin}}
 
 
 {{>components/footer}}

@@ -72,6 +72,7 @@ public class AuthController {
         List<String> errorMessages = new ArrayList<>();
         bindingResult.getFieldErrors().forEach(fieldError -> errorMessages.add(fieldError.getDefaultMessage()));
         bindingResult.getGlobalErrors().forEach(globalError -> errorMessages.add(globalError.getDefaultMessage()));
+
         model.addAttribute("errors", errorMessages);
         model.addAttribute("user", user);
         model.addAttribute("pathology", user.getPathology());
@@ -98,16 +99,15 @@ public class AuthController {
         }
 
         userService.createUser(user);
-
         ra.addFlashAttribute("success", "Utilisateur créé avec succès! Veuillez vous connecter");
         return "redirect:/login";
-
     }
 
     @GetMapping("/register")
     public String createUser(Model model) {
         List<Pathology> pathologies = pathologyRepository.findAll();
         model.addAttribute("pathologies", pathologies);
+
         return "forms/newUserForm";
     }
 

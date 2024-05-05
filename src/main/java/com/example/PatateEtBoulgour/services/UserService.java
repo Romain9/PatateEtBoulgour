@@ -19,19 +19,6 @@ public class UserService {
     @Autowired
     private HttpSession session;
 
-    public ModelAndView getUserListModelAndView() {
-        List<User> users = userRepository.findAll();
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("users", users);
-        modelAndView.setViewName("admin/userlist");
-        return modelAndView;
-    }
-
-    public ModelAndView getNewUserFormModelAndView() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("admin/addNewUser");
-        return modelAndView;
-    }
 
     public void removeActivity(User user, Activity activity) {
        user.removeActivity(activity);

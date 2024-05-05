@@ -22,18 +22,35 @@ public class DevConfig {
         return () -> {
             User admin = User.builder()
                     .age(20)
-                    .gender("Triple PHP")
+                    .gender("Male")
                     .address("25 Je ne contracte pas, 00000 Nul Part")
                     .firstName("Jean")
                     .lastName("Sebastonks")
                     .password("tamere")
                     .username("Compliste800")
+                    .email("lol@lol.com")
                     .role(Role.SUPER_ADMIN)
                     .pathology(
                             new Pathology(1L, "Maladies cardiovasculaires")
                     )
                     .build();
+
+            User utilisateur = User.builder()
+                    .age(20)
+                    .gender("Triple PHP")
+                    .address("25 Je ne contracte pas, 00000 Nul Part")
+                    .firstName("Jeanne")
+                    .lastName("Sebastonkette")
+                    .password("tamere")
+                    .username("patate")
+                    .email("lol2@lol.com")
+                    .role(Role.USER)
+                    .pathology(
+                            new Pathology(2L, "Maladies cardiovasculaires")
+                    )
+                    .build();
             userRepository.save(admin);
+            userRepository.save(utilisateur);
         };
     }
 }

@@ -6,6 +6,7 @@ import com.example.PatateEtBoulgour.entities.Activity;
 import com.example.PatateEtBoulgour.entities.Parcours;
 import com.example.PatateEtBoulgour.entities.Pathology;
 import com.example.PatateEtBoulgour.entities.User;
+import com.example.PatateEtBoulgour.enums.Role;
 import com.example.PatateEtBoulgour.exception.InvalidAddressException;
 import com.example.PatateEtBoulgour.exception.InvalidApiResponse;
 import com.example.PatateEtBoulgour.repository.ActivityRepository;
@@ -42,14 +43,14 @@ public class UserController {
     public ModelAndView account() {
         ModelAndView mv = new ModelAndView("profile");
         User user = userService.getCurrentUser();
-        List<Activity> activities = user.getActivities();
+        Set<Activity> activities = user.getActivities();
 
+        mv.addObject("isAdmin", userService.hasRole("ADMIN"));
         mv.addObject("user", user);
 
         for (Activity activity : activities) {
             activity.setContainsCurrentUser(true);
         }
-
 
         if (userService.isLoggedIn()) {
             mv.addObject("activitiesCarroussel",
@@ -58,7 +59,6 @@ public class UserController {
         }
 
         mv.addObject("inProfile", true);
-
         mv.addObject("activities", activities);
 
         return mv;

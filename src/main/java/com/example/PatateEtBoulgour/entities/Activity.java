@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.checkerframework.common.aliasing.qual.Unique;
 
 import java.util.HashSet;
 import java.util.List;
@@ -37,7 +38,7 @@ public class Activity {
     @ManyToMany
     private List<Discipline> disciplines;
 
-    @OneToMany(fetch = FetchType.EAGER, orphanRemoval = true)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "activities")
     Set<User> participants;
 
     public boolean userIsParticipant(User user) {
