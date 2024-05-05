@@ -12,7 +12,9 @@
     <li>Age: {{age}}</li>
     <li>Email: {{email}}</li>
     <li>Adresse: {{address}}</li>
-    <li>Pathology: {{pathology.label}}</li>
+    {{#pathology}}
+        <li>Pathology: {{pathology.label}}</li>
+    {{/pathology}}
     <li>
         Activités : {{^activities}}Aucune activité.{{/activities}}
         <ul>
