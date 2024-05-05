@@ -77,6 +77,7 @@ public class AdminController {
     public String activityList(Model model) {
         HashMap<Activity, ArrayList<ActivityRating>> mappedActivites = new HashMap<>();
 
+        // On regroupe les notes par activités.
         for (ActivityRating ar : activityRatingRepository.findAll()) {
                 Activity ac = ar.getActivity();
                 if (mappedActivites.containsKey(ac)) {
@@ -88,14 +89,16 @@ public class AdminController {
                 }
         }
 
+        // Calcul de la moyenne pour chaque activité.
         List<RatedActivity> ratings = new ArrayList<>();
         for (Activity ac : mappedActivites.keySet()) {
-            double avg = mappedActivites.get(ac)
+            ArrayList<ActivityRating> activities = mappedActivites.get(ac);
+            double avg = activities
                     .stream()
                     .mapToDouble(ActivityRating::getRating).average()
                     .orElse(0.0);
 
-            ratings.add(new RatedActivity(ac.getId(), ac.getLabel(), ac.getAddress(), avg));
+            ratings.add(new RatedActivity(ac.getId(), ac.getLabel(), ac.getAddress(), avg, activities.size()));
         }
 
         model.addAttribute("rating", ratings);

@@ -1,0 +1,97 @@
+SET FOREIGN_KEY_CHECKS=0;
+INSERT INTO `activity_rating` (`rating`, `activity_id`, `id`, `user_id`) VALUES
+(3, 3, 1, 3),
+(5, 13, 2, 3),
+(2, 33, 3, 3),
+(5, 32, 4, 3),
+(2, 29, 5, 3),
+(4, 45, 6, 3),
+(2, 46, 7, 3),
+(2, 36, 8, 3),
+(4, 35, 9, 3),
+(3, 14, 10, 3),
+(3, 27, 11, 3),
+(5, 47, 12, 3),
+(5, 20, 13, 3),
+(2, 44, 14, 3),
+(3, 21, 15, 3),
+(3, 34, 16, 3),
+(3, 15, 17, 2),
+(5, 3, 18, 2),
+(3, 13, 19, 2),
+(1, 20, 20, 2),
+(2, 9, 21, 2);
+
+INSERT INTO `parcours` (`rating`, `datetime`, `id`, `user_id`, `commentaire`) VALUES
+(10, '2024-05-05 16:08:10.726109', 1, 3, 'Excellent parcours ! Rien à redire. '),
+(6, '2024-05-05 16:08:47.991779', 2, 3, 'Les animateurs ne sont plus à l\'écoute. '),
+(8, '2024-05-05 16:09:27.081822', 3, 2, 'Des douleurs après l\'activité'),
+(2, '2024-05-05 16:09:56.566665', 4, 2, 'Je suis consterné ! ');
+
+INSERT INTO `parcours_activities` (`activities_id`, `parcours_id`) VALUES
+(3, 1),
+(13, 1),
+(33, 1),
+(32, 1),
+(29, 1),
+(45, 1),
+(46, 1),
+(9, 1),
+(40, 1),
+(47, 1),
+(20, 1),
+(44, 1),
+(27, 1),
+(21, 1),
+(34, 1),
+(14, 1),
+(35, 1),
+(36, 1),
+(3, 2),
+(13, 2),
+(33, 2),
+(32, 2),
+(47, 2),
+(20, 2),
+(44, 2),
+(27, 2),
+(21, 2),
+(34, 2),
+(14, 2),
+(35, 2),
+(36, 2),
+(15, 3),
+(3, 3),
+(15, 4),
+(3, 4),
+(13, 4),
+(9, 4),
+(20, 4);
+
+
+INSERT INTO `user` (`age`, `id`, `pathology_id`, `username`, `address`, `email`, `first_name`, `gender`, `last_name`, `password`, `role`) VALUES
+(21, 1, NULL, 'Admin', '60 Rue du Plat d\'Étain, 37000 Tours', 'admin@root.fr', 'Admin', 'Male', 'Principal', '$2a$10$qTqCcdXoiI1beWk9bATZS.rzT60HyfxL/OfUE.uCDiaLqYmDdRVIy', 'SUPER_ADMIN'),
+(69, 2, 5, 'michel2', '2 Bd Tonnellé, 37000 Tours', 'michelle2@gmail.com', 'Michel', 'Male', 'Platin', '$2a$10$/wNLYiuryaOtqViL46.iUe27dmG5rdOp5hRC195a4k9TCSXMOAHfO', 'USER'),
+(89, 3, 2, 'jaqueline.roseau', '2 Bd Tonnellé, 37000 Tours', 'jaqueline5@ymail.com', 'Jaqueline', 'Female', 'Roseau', '$2a$10$/1QhoBTBOuafoCg8LEIwtOcf2Rx/rLfOPxyMECmhxwvAPAhqI6mhO', 'USER');
+
+INSERT INTO `user_activities` (`activity_id`, `user_id`) VALUES
+(3, 2),
+(3, 3),
+(9, 2),
+(13, 2),
+(13, 3),
+(14, 3),
+(15, 2),
+(20, 2),
+(20, 3),
+(21, 3),
+(27, 3),
+(32, 3),
+(33, 3),
+(34, 3),
+(35, 3),
+(36, 3),
+(44, 3),
+(47, 3);
+
+SET FOREIGN_KEY_CHECKS=1;

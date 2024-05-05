@@ -3,13 +3,14 @@
 <a href="/admin/utilisateurs-liste"><button>Consulter la liste des utilisateurs</button></a>
 <a href="/admin/consulter-parcours"><button>Consulter la liste des parcours réalisés par les utilisateur</button></a>
 
-<h1>Liste des activités</h1>
+<h1>Note moyenne des activités (ayant au moins une note) :</h1>
 <table>
     <thead>
     <tr>
         <th>Adresse</th>
         <th>Label</th>
         <th>Note moyenne</th>
+        <th>Nombre de notes</th>
     </tr>
     </thead>
     <tbody>
@@ -18,6 +19,7 @@
             <td>{{address}}</td>
             <td>{{label}}</td>
             <td>{{rating}}</td>
+            <td>{{nbNote}}</td>
         </tr>
         {{/rating}}
     </tbody>

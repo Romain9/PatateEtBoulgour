@@ -14,4 +14,5 @@ public class RatedActivity {
     private String label;
     private String address;
     private double rating;
+    private int nbNote;
 }
