@@ -1,8 +1,7 @@
 .carousel {
     width: 38em;
-    height: 25em;
+    height: 30em;
     margin: 2em auto 0 auto;
-    border: solid 1px red;
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 20% 60% 20%;
@@ -13,6 +12,7 @@
     display: grid;
     grid-auto-flow: column;
     width: auto;
+    height: 18em;
 }
 
 /*
@@ -29,7 +29,7 @@
     width: 37.9em;
     display: grid;
     grid-template-columns: 1fr 1fr 35%;
-    grid-template-rows: 9% 57% 34%;
+    grid-template-rows: 10% 40% 50%;
 }
 
 .it {
@@ -49,4 +49,28 @@
     margin: 5px 0 5px 0;
     align-content: center;
     justify-content: center;
+    column-gap: 1em;
+}
+
+.carouselBtn > * {
+    background-color: var(--secondary);
+    border: none;
+    transition: .5s ease-in-out;
+    width: 30%;
+    height: 40%;
+    font-size: 14pt;
+}
+
+.carouselBtn > *:hover {
+    background-color: var(--main);
+}
+
+#btnLeft {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#btnRight {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
