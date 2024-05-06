@@ -27,7 +27,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         if (handler instanceof HandlerMethod handlerMethod) {
             Method method = handlerMethod.getMethod();
 
-            // Vérifie les controlleurs avec @Logged
+            // Vérifie les controlleurs avec @RequireLogged
             if (method.isAnnotationPresent(RequireLogged.class)) {
                 if (!isAuthenticated()) {
                     response.sendRedirect("/login");
