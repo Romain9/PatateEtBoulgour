@@ -3,7 +3,7 @@
 <h2 class="sign">Inscription</h2>
 
 {{#errors}}
-    <p>{{this}}</p>
+    <p class="error"><strong>Erreur:</strong>{{this}}</p>
 {{/errors}}
 
 <form action="/register" method="post">
@@ -41,7 +41,7 @@
     </select>
 
     <label for="address">Adresse :</label>
-    <input id="address" name="address" value="{{#user.address}}{{.}}{{/user.address}}" required>
+    <input id="address" name="address" placeholder="5 rue des marcassins, 37000 Tours" value="{{#user.address}}{{.}}{{/user.address}}" required>
 
     <label for="pathology">Pathology :</label>
     <select id="pathology" name="pathology" required>

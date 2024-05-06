@@ -1,12 +1,16 @@
 {{>components/header}}
 {{#user}}
+
+
+<div class="entetePr">
+    <a class="adminBtn" href="/admin/utilisateurs-liste">Consulter la liste des utilisateurs</a>
+    <a class="adminBtn" href="/admin/consulter-activités">Consulter la note moyenne des activités</a>
+    <a class="adminBtn" href="/admin/consulter-parcours">Consulter la liste des parcours réalisés par les utilisateur</a>
+</div>
+
 <h1>Info sur {{firstName}} {{lastName}}</h1>
 
-<a href="/admin/utilisateurs-liste"><button>Consulter la liste des utilisateurs</button></a>
-<a href="/admin/consulter-activités"><button>Consulter la note moyenne des activités</button></a>
-<a href="/admin/consulter-parcours"><button>Consulter la liste des parcours réalisés par les utilisateur</button></a>
-
-<ul>
+<ul class="details">
     <li>Nom: {{lastName}}</li>
     <li>Prénom: {{firstName}}</li>
     <li>Age: {{age}}</li>
@@ -25,7 +29,7 @@
     </li>
 </ul>
 
-<h2>Parcours notés :</h2>
+<h2 class="parc">Parcours notés :</h2>
 <table>
     <thead>
     <tr>

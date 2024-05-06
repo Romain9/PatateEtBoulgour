@@ -1,6 +1,6 @@
 .carousel {
     width: 38em;
-    height: 30em;
+    height: 35em;
     margin: 2em auto 0 auto;
     display: grid;
     grid-template-columns: 100%;
@@ -12,7 +12,7 @@
     display: grid;
     grid-auto-flow: column;
     width: auto;
-    height: 18em;
+    height: 21em;
 }
 
 /*
