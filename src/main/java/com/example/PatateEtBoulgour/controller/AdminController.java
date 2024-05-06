@@ -10,6 +10,8 @@ import com.example.PatateEtBoulgour.entities.User;
 import com.example.PatateEtBoulgour.repository.ActivityRatingRepository;
 import com.example.PatateEtBoulgour.repository.ParcoursRepository;
 import com.example.PatateEtBoulgour.repository.UserRepository;
+import com.example.PatateEtBoulgour.services.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,11 +38,15 @@ public class AdminController {
     @Autowired
     private ActivityRatingRepository activityRatingRepository;
 
+    @Autowired
+    private UserService userService;
+
     @RequireLogged
     @RequireRole("Admin")
     @GetMapping("/utilisateurs-liste")
     public ModelAndView userList(ModelAndView modelAndView) {
         List<User> users = userRepository.findAll();
+        modelAndView.addObject("user", userService.getCurrentUser());
         modelAndView.addObject("users", users);
         modelAndView.setViewName("admin/userlist");
 
@@ -66,7 +72,7 @@ public class AdminController {
     @GetMapping("/consulter-parcours")
     public String parcoursList(Model model) {
         List<Parcours> parcours = parcoursRepository.findAll();
-
+        model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("parcours", parcours);
         return "admin/parcourslist";
     }
@@ -101,6 +107,7 @@ public class AdminController {
             ratings.add(new RatedActivity(ac.getId(), ac.getLabel(), ac.getAddress(), avg, activities.size()));
         }
 
+        model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("rating", ratings);
         return "admin/activitylist";
     }
